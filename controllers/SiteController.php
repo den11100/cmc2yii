@@ -137,7 +137,7 @@ class SiteController extends Controller
     public function actionInfoPair($symbol)
     {
         $symbol = strtoupper($symbol);
-
+        //TODO переделать запрос
 //        $modelsGroupByExchange = Yii::$app->db->createCommand('SELECT
 //              s.volume,
 //              s.market,
@@ -149,25 +149,25 @@ class SiteController extends Controller
 //            ->bindValue(':symbol', $symbol . '/USD')
 //            ->queryAll();
 
-        $modelsGroupByExchangeNow =  StateTest::find()
-            ->select('volume, market, exchange, timestamp')
-            ->where(['LIKE', 'market', $symbol. '/USD'])
-            ->andWhere(['<=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW())')])
-            ->orderBy('exchange asc')
-            ->groupBy('exchange')
-            ->asArray()
-            ->all();
-
-        VarDumper::dump($modelsGroupByExchangeNow,7,1);die;
-
-//        $modelsGroupByExchange = StateTest::find()
+//        $modelsGroupByExchange =  StateTest::find()
 //            ->select('volume, market, exchange, timestamp')
 //            ->where(['LIKE', 'market', $symbol. '/USD'])
-//            ->andWhere(['>=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)')])
-//            ->orderBy('timestamp desc')
+//            ->andWhere(['<=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW())')])
+//            ->orderBy('exchange asc')
 //            ->groupBy('exchange')
 //            ->asArray()
 //            ->all();
+//
+//        VarDumper::dump($modelsGroupByExchange,7,1);die;
+
+        $modelsGroupByExchange = State::find()
+            ->select('sum(volume) my_sum, market, exchange, timestamp')
+            ->where(['LIKE', 'market', $symbol. '/USD'])
+            ->andWhere(['>=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)')])
+            ->orderBy('timestamp desc')
+            ->groupBy('exchange')
+            ->asArray()
+            ->all();
 
         $pieExchangeData = '';
         if ($modelsGroupByExchange != []) {
