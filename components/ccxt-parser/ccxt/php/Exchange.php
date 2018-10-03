@@ -58,7 +58,7 @@ class Exchange {
 //        'bit2c',
 //        'bitbank',
 //        'bitbay',
-        'bitfinex',
+//        'bitfinex',
 //        'bitfinex2',
 //        'bitflyer',
 //        'bithumb',

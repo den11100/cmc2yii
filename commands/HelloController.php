@@ -37,12 +37,12 @@ class HelloController extends Controller
         return ExitCode::OK;
     }
 
-    public function actionStates()
+    public function actionStates($interval)
     {
         include __DIR__ . "/../components/ccxt-parser/parser.php";
 
         $parser = new \Parser();
 
-        $parser::update_tm();
+        $parser::update_tm($interval);
     }
 }

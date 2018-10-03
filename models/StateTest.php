@@ -15,9 +15,8 @@ use yii\helpers\VarDumper;
  * @property string $market
  * @property string $exchange
  * @property int $timestamp
- * @property int $interval
  */
-class State extends \yii\db\ActiveRecord
+class StateTest extends \yii\db\ActiveRecord
 {
     public static $states = [];
     public static $values = [];
@@ -27,7 +26,7 @@ class State extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'state';
+        return 'state-test';
     }
 
     public static function prepareStates()
@@ -92,7 +91,7 @@ class State extends \yii\db\ActiveRecord
         ];
 
         foreach ($times as $time => $values){
-            self::$states[$time] = State::find()
+            self::$states[$time] = StateTest::find()
                 ->where(['LIKE', 'market', '/USD',])
                 ->andWhere(['between', 'timestamp', $values['from'], $values['to'], ])
                 ->groupBy('exchange, market')
@@ -199,7 +198,7 @@ class State extends \yii\db\ActiveRecord
         return [
             [['high', 'low', 'volume'], 'number'],
             [['timestamp'], 'integer'],
-            [['market', 'exchange', 'interval'], 'string', 'max' => 255],
+            [['market', 'exchange'], 'string', 'max' => 255],
         ];
     }
 
@@ -216,7 +215,6 @@ class State extends \yii\db\ActiveRecord
             'market' => 'Market',
             'exchange' => 'Exchange',
             'timestamp' => 'Timestamp',
-            'interval' => 'Interval',
         ];
     }
 

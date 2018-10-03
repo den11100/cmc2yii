@@ -7,7 +7,7 @@
 	DB::$settings = array(
 		'hostname'	=>	'localhost',
 		'username'	=>	'root',
-		'password'	=>	'mysql',
+		'password'	=>	'111111',
 		'db_name'	=>	'cmc2test'
 	);
 	
@@ -23,13 +23,13 @@
 			}
 		}
 
-		public static function update_tm() {
+		public static function update_tm($interval) {
 			$exchanges = self::get_exchanges();
 
 			$pairs = array();
 			foreach ($exchanges as $exchange) {
 			    $time = time();
-				$pairs = self::get_pairs_tm($exchange, '1m');
+				$pairs = self::get_pairs_tm($exchange, $interval);
 				//print_r($pairs);
 				DB::insert_items('state', $pairs);
 			}
@@ -62,7 +62,7 @@
 					));
 				}
 			} catch (Exception $exception) {
-//				echo 'error'."\t".$exchange->name."\n";
+				echo 'error'."\t".$exchange->name."\n";
 			}
 			return $pairs;
 		}
@@ -83,7 +83,8 @@
                                 'high'		=> floatval($ticker[2]),
                                 'low'		=> floatval($ticker[3]),
                                 'volume'	=> floatval($ticker[5]),
-                                'timestamp'	=> $ticker[0]
+                                'timestamp'	=> $ticker[0],
+                                'interval'	=> $tm
                             ));
                         }
                     }
