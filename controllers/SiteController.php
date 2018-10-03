@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use app\models\Cctx;
 use app\models\CctxSearch;
+use app\models\Help;
 use app\models\State;
+use app\models\StateTest;
 use ccxt\Exchange;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -12,6 +14,7 @@ use yii\data\ArrayDataProvider;
 use yii\db\Command;
 use yii\db\Connection;
 use yii\db\Exception;
+use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -63,7 +66,7 @@ class SiteController extends Controller
             ],
         ];
     }
-
+    //TODO зачем этот метод ?
     public function actionUpdate()
     {
         #include __DIR__ . "/../components/ccxt-parser/parser.php";
@@ -77,6 +80,7 @@ class SiteController extends Controller
         die();
     }
 
+    //TODO зачем этот метод ?
     public function actionUpdateTm()
     {
         #include __DIR__ . "/../components/ccxt-parser/parser.php";
@@ -129,4 +133,58 @@ class SiteController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionInfoPair($symbol)
+    {
+        $symbol = strtoupper($symbol);
+
+//        $modelsGroupByExchange = Yii::$app->db->createCommand('SELECT
+//              s.volume,
+//              s.market,
+//              s.exchange,
+//              s.timestamp,
+//              s.volume - (SELECT x.volume, x.timestamp FROM {{%state-test}} as x WHERE x.timestamp > s.timestamp AND x.exchange = s.exchange LIMIT 1) as result_volume
+//                FROM {{%state-test}} as s WHERE s.market LIKE :symbol AND s.timestamp >= UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY) GROUP BY s.exchange
+//                ')
+//            ->bindValue(':symbol', $symbol . '/USD')
+//            ->queryAll();
+
+        $modelsGroupByExchangeNow =  StateTest::find()
+            ->select('volume, market, exchange, timestamp')
+            ->where(['LIKE', 'market', $symbol. '/USD'])
+            ->andWhere(['<=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW())')])
+            ->orderBy('exchange asc')
+            ->groupBy('exchange')
+            ->asArray()
+            ->all();
+
+        VarDumper::dump($modelsGroupByExchangeNow,7,1);die;
+
+//        $modelsGroupByExchange = StateTest::find()
+//            ->select('volume, market, exchange, timestamp')
+//            ->where(['LIKE', 'market', $symbol. '/USD'])
+//            ->andWhere(['>=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)')])
+//            ->orderBy('timestamp desc')
+//            ->groupBy('exchange')
+//            ->asArray()
+//            ->all();
+
+        $pieExchangeData = '';
+        if ($modelsGroupByExchange != []) {
+            /* добавляем в массив моделей в каждую модель свойство percent */
+            $modelsGroupByExchange = Help::getPercent($modelsGroupByExchange);
+
+            //{name:'ACX', y:0.1767}, {name:'Binance', y:0.2744}, {name:'HitBTC', y:0.5488}
+            foreach ($modelsGroupByExchange as $model) {
+                $pieExchangeData .= '{name:\'' . $model['exchange'] . '\',y:' . $model['percent']. '},';
+            }
+        }
+
+        return $this->render('info-pair', [
+            'modelsGroupByExchange' => $modelsGroupByExchange,
+            'symbol' => $symbol,
+            'pieExchangeData' => $pieExchangeData,
+        ]);
+    }
+
 }
