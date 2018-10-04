@@ -137,37 +137,13 @@ class SiteController extends Controller
     public function actionInfoPair($symbol)
     {
         $symbol = strtoupper($symbol);
-        //TODO переделать запрос
-//        $modelsGroupByExchange = Yii::$app->db->createCommand('SELECT
-//              s.volume,
-//              s.market,
-//              s.exchange,
-//              s.timestamp,
-//              s.volume - (SELECT x.volume, x.timestamp FROM {{%state-test}} as x WHERE x.timestamp > s.timestamp AND x.exchange = s.exchange LIMIT 1) as result_volume
-//                FROM {{%state-test}} as s WHERE s.market LIKE :symbol AND s.timestamp >= UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY) GROUP BY s.exchange
-//                ')
-//            ->bindValue(':symbol', $symbol . '/USD')
-//            ->queryAll();
 
-//        $modelsGroupByExchange =  StateTest::find()
-//            ->select('volume, market, exchange, timestamp')
-//            ->where(['LIKE', 'market', $symbol. '/USD'])
-//            ->andWhere(['<=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW())')])
-//            ->orderBy('exchange asc')
-//            ->groupBy('exchange')
-//            ->asArray()
-//            ->all();
-//
-//        VarDumper::dump($modelsGroupByExchange,7,1);die;
-
-        $modelsGroupByExchange = State::find()
-            ->select('sum(volume) my_sum, market, exchange, timestamp')
-            ->where(['LIKE', 'market', $symbol. '/USD'])
-            ->andWhere(['>=', 'timestamp', new Expression('UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)')])
-            ->orderBy('timestamp desc')
-            ->groupBy('exchange')
-            ->asArray()
-            ->all();
+        $modelsGroupByExchange = Yii::$app->db->createCommand('SELECT * FROM {{%state}} z1  
+            INNER JOIN (SELECT MAX(id) AS id FROM {{%state}} WHERE market LIKE :symbol AND `interval` = "1d" GROUP BY exchange) AS z2 
+            ON (z1.id = z2.id)
+            ')->bindValue(':symbol', $symbol . '/USD%')
+            ->queryAll();
+        //VarDumper::dump($modelsGroupByExchange,7,1);die;
 
         $pieExchangeData = '';
         if ($modelsGroupByExchange != []) {

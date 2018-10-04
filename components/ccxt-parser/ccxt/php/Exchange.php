@@ -51,57 +51,57 @@ class Exchange {
 //        '_1btcxe',
 //        'acx',
 //        'allcoin',
-//        'anxpro',
+//        'anxpro', // null
 //        'anybits',
 //        'bibox',
-        'binance',
-//        'bit2c',
+        'binance', // good
+//        'bit2c', // null
 //        'bitbank',
-//        'bitbay',
+//        'bitbay', // null
 //        'bitfinex',
 //        'bitfinex2',
-//        'bitflyer',
-//        'bithumb',
-//        'bitkk',
+//        'bitflyer', // null
+//        'bithumb', // null
+//        'bitkk', // null
 //        'bitlish',
 //        'bitmarket',
 //        'bitmex',
 //        'bitsane',
 //        'bitso',
-//        'bitstamp',
+//        'bitstamp', // null
 //        'bitstamp1',
-//        'bittrex',
-//        'bitz',
+//        'bittrex', // error
+//        'bitz', // error
 //        'bl3p',
 //        'bleutrade',
 //        'braziliex',
-//        'btcbox',
-//        'btcchina',
-//        'btcexchange',
-//        'btcmarkets',
+//        'btcbox', // null
+//        'btcchina', // null
+//        'btcexchange', // null
+//        'btcmarkets', // null
 //        'btctradeim',
 //        'btctradeua',
 //        'btcturk',
 //        'btcx',
 //        'bxinth',
-//        'ccex',
-//        'cex',
-//        'chbtc',
+//        'ccex', // error DdosProtection
+//        'cex', // error
+//        'chbtc', // null
 //        'chilebit',
 //        'cobinhood',
-//        'coinbase',
+//        'coinbase', // null
 //        'coinbasepro',
 //        'coincheck',
 //        'coinegg',
 //        'coinex',
-//        'coinexchange',
+//        'coinexchange', // null
 //        'coinfalcon',
 //        'coinfloor',
 //        'coingi',
-//        'coinmarketcap',
+//        'coinmarketcap', // error
 //        'coinmate',
 //        'coinnest',
-//        'coinone',
+//        'coinone', //null
 //        'coinsecure',
 //        'coinspot',
 //        'cointiger',
@@ -111,37 +111,37 @@ class Exchange {
 //        'deribit',
 //        'dsx',
 //        'ethfinex',
-//        'exmo',
-//        'exx',
-//        'fcoin',
+        'exmo', // good
+//        'exx', // error
+//        'fcoin', // null
 //        'flowbtc',
-//        'foxbit',
+//        'foxbit', // null
 //        'fybse',
 //        'fybsg',
-//        'gatecoin',
+//        'gatecoin', // good  8day ago
 //        'gateio',
-//        'gdax',
-//        'gemini',
+//        'gdax', // null
+//        'gemini', // null
 //        'getbtc',
-//        'hadax',
-        'hitbtc',
+//        'hadax', // null
+//        'hitbtc', // error
 //        'hitbtc2',
-//        'huobi',
+//        'huobi', // null
 //        'huobicny',
 //        'huobipro',
 //        'ice3x',
 //        'independentreserve',
 //        'indodax',
-//        'itbit',
+//        'itbit', //null
 //        'jubi',
-//        'kraken',
+//        'kraken', // error
 //        'kucoin',
 //        'kuna',
 //        'lakebtc',
-//        'lbank',
+//        'lbank', // error lbank fetchOHLCV requires a $since argument
 //        'liqui',
-//        'livecoin',
-//        'luno',
+        'livecoin', // good
+//        'luno', // error
 //        'lykke',
 //        'mercado',
 //        'mixcoins',
@@ -149,9 +149,9 @@ class Exchange {
 //        'nova',
 //        'okcoincny',
 //        'okcoinusd',
-//        'okex',
+//        'okex', //error
 //        'paymium',
-//        'poloniex',
+        'poloniex', // good
 //        'qryptos',
 //        'quadrigacx',
 //        'quoinex',
@@ -166,10 +166,10 @@ class Exchange {
 //        'virwox',
 //        'wex',
 //        'xbtce',
-//        'yobit',
+//        'yobit', // error
 //        'yunbi',
 //        'zaif',
-//        'zb',
+//        'zb', // null
     );
 
     public static function split ($string, $delimiters = array (' ')) {

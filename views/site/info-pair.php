@@ -17,6 +17,20 @@ $this->title = 'Круговая диаграмма обьём торго мон
         <div class="col-md-6">
             <h2>Суммарный обьём торгов <?= $symbol ?>/USD разбивка по биржам за 24 часа</h2>
             <div id="volume-per-exchange" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+            <?php foreach ($modelsGroupByExchange as $model): ?>
+            <div class="row">
+                <div class="col-md-4"><h3><?= $model['exchange'] ?></h3></div>
+                <div class="col-md-8">
+                    <p><?= $model['market'] ?> ~  volume <?= $model['volume'] ?> $</p>
+                    <p><?= $model['market'] ?> ~  price height <?= $model['high'] ?> $</p>
+                    <p><?= $model['market'] ?> ~  price low <?= $model['low'] ?> $</p>
+                </div>
+            </div>
+            <hr>
+            <?php endforeach; ?>
+
+
             <?php
                 echo "<pre style='font-size: 10px'>";
                 print_r($modelsGroupByExchange);

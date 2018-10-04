@@ -21,10 +21,10 @@ class Help extends Model
     public static function getPercent($models)
     {
         if($models != []) {
-            $sum = array_sum(ArrayHelper::getColumn($models, 'my_sum'));
+            $sum = array_sum(ArrayHelper::getColumn($models, 'volume'));
             foreach ($models as $key => $model) {
-                $models[$key]['my_sum'] = round($model['my_sum'], 4);
-                $models[$key]['percent'] = round($model['my_sum'] / $sum, 4);
+                //$models[$key]['volume'] = round($model['volume'], 4);
+                $models[$key]['percent'] = round($model['volume'] / $sum, 4);
             }
         }
 
