@@ -156,10 +156,42 @@ class SiteController extends Controller
             }
         }
 
+
+
+        $modelsGroupByMarket = Yii::$app->db->createCommand('SELECT SUM(volume) as volume, market FROM (
+            SELECT * FROM {{%state}} z1  
+            INNER JOIN (SELECT MAX(id) AS ids FROM {{%state}} WHERE market LIKE :symbol AND `interval` = "1d" GROUP BY market, exchange) AS z2 
+            ON (z1.id = z2.ids)) AS x GROUP BY market
+            ')->bindValue(':symbol', $symbol .'/%')
+            ->queryAll();
+
+        $modelsGroupByMarketWithExchange = Yii::$app->db->createCommand('
+            SELECT * FROM {{%state}} z1  
+            INNER JOIN (SELECT MAX(id) AS ids FROM {{%state}} WHERE market LIKE :symbol AND `interval` = "1d" GROUP BY market, exchange) AS z2 
+            ON (z1.id = z2.ids)
+            ')->bindValue(':symbol', $symbol .'/%')
+            ->queryAll();
+
+        //VarDumper::dump($modelsGroupByMarketWithExchange,7,1);
+
+        $pieMarketData = '';
+        if ($modelsGroupByMarket != []) {
+            /* добавляем в массив моделей в каждую модель свойство percent */
+            $modelsGroupByMarket = Help::getPercent($modelsGroupByMarket);
+
+            //{name:'BTC/USD', y:0.1767}, {name:'BTC/USDT', y:0.2744}, {name:'BTC/USDC', y:0.5488}
+            foreach ($modelsGroupByMarket as $model) {
+                $pieMarketData .= '{name:\'' . $model['market'] . '\',y:' . $model['percent']. '},';
+            }
+        }
+
         return $this->render('info-pair', [
             'modelsGroupByExchange' => $modelsGroupByExchange,
             'symbol' => $symbol,
             'pieExchangeData' => $pieExchangeData,
+            'modelsGroupByMarket' => $modelsGroupByMarket,
+            'modelsGroupByMarketWithExchange' => $modelsGroupByMarketWithExchange,
+            'pieMarketData' => $pieMarketData,
         ]);
     }
 

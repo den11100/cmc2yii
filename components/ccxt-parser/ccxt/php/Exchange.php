@@ -54,7 +54,7 @@ class Exchange {
 //        'anxpro', // null
 //        'anybits',
 //        'bibox',
-        'binance', // good
+//        'binance', // good очень большие показатели volume
 //        'bit2c', // null
 //        'bitbank',
 //        'bitbay', // null
