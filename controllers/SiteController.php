@@ -157,7 +157,6 @@ class SiteController extends Controller
         }
 
 
-
         $modelsGroupByMarket = Yii::$app->db->createCommand('SELECT SUM(volume) as volume, market FROM (
             SELECT * FROM {{%state}} z1  
             INNER JOIN (SELECT MAX(id) AS ids FROM {{%state}} WHERE market LIKE :symbol AND `interval` = "1d" GROUP BY market, exchange) AS z2 
@@ -205,6 +204,15 @@ class SiteController extends Controller
             'modelsGroupByMarket' => $modelsGroupByMarket,
             'markets' => $markets,
             'pieMarketData' => $pieMarketData,
+        ]);
+    }
+
+    public function infoLeaders()
+    {
+        $xxx = '';
+
+        return $this->render('info-leaders', [
+            'xxx' => $xxx,
         ]);
     }
 

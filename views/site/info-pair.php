@@ -49,7 +49,15 @@ $this->title = 'Круговая диаграмма обьём торго мон
                     <div class="col-md-4"><h3><?= $key ?></h3></div>
                     <div class="col-md-8">
                         <?php foreach ($market as $item): ?>
-                            <p><?= $item['exchange'] ?> price height <?= $item['high'] ?> $  | price low <?= $item['low'] ?> $</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><?= $item['exchange'] ?></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><strong>Price height:</strong> <?= $item['high'] ?> $<br>
+                                    <strong>Price low:</strong> <?= $item['low'] ?> $</p>
+                            </div>
+                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
