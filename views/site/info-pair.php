@@ -4,7 +4,7 @@
  * @var $this yii\web\View
  * @var array $modelsGroupByExchange
  * @var array $modelsGroupByMarket
- * @var array $modelsGroupByMarketWithExchange
+ * @var array $markets
  * @var string $symbol
  * @var string $pieExchangeData
  * @var string $pieMarketData
@@ -44,11 +44,13 @@ $this->title = 'Круговая диаграмма обьём торго мон
             <h2>Суммарный обьём торгов <?= $symbol ?> на всех биржах за 24 часа разбивка по валютам</h2>
             <div id="market" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
-            <?php foreach ($modelsGroupByMarketWithExchange as $model): ?>
+            <?php foreach ($markets as $key => $market): ?>
                 <div class="row">
-                    <div class="col-md-4"><h3><?= $model['market'] ?></h3></div>
+                    <div class="col-md-4"><h3><?= $key ?></h3></div>
                     <div class="col-md-8">
-                        <p><?= $model['exchange'] ?> price height <?= $model['high'] ?> $  | price low <?= $model['low'] ?> $</p>
+                        <?php foreach ($market as $item): ?>
+                            <p><?= $item['exchange'] ?> price height <?= $item['high'] ?> $  | price low <?= $item['low'] ?> $</p>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <hr>
@@ -107,7 +109,7 @@ $this->title = 'Круговая диаграмма обьём торго мон
                 type: 'pie'
             },
             title: {
-                text: 'Volume per exchange for 24h'
+                text: 'Market for 24h'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

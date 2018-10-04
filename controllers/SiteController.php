@@ -172,7 +172,20 @@ class SiteController extends Controller
             ')->bindValue(':symbol', $symbol .'/%')
             ->queryAll();
 
-        //VarDumper::dump($modelsGroupByMarketWithExchange,7,1);
+        $markets = [];
+        if($modelsGroupByMarketWithExchange != []) {
+            foreach ($modelsGroupByMarketWithExchange as $key => $item) {
+                $markets[$item['market']][$key]['high'] = $item['high'];
+                $markets[$item['market']][$key]['low'] = $item['low'];
+                $markets[$item['market']][$key]['volume'] = $item['volume'];
+                $markets[$item['market']][$key]['market'] = $item['market'];
+                $markets[$item['market']][$key]['exchange'] = $item['exchange'];
+                $markets[$item['market']][$key]['timestamp'] = $item['timestamp'];
+                $markets[$item['market']][$key]['interval'] = $item['interval'];
+            }
+            //VarDumper::dump($modelsGroupByMarketWithExchange,7,1);
+            //VarDumper::dump($result,7,1);die;
+        }
 
         $pieMarketData = '';
         if ($modelsGroupByMarket != []) {
@@ -190,7 +203,7 @@ class SiteController extends Controller
             'symbol' => $symbol,
             'pieExchangeData' => $pieExchangeData,
             'modelsGroupByMarket' => $modelsGroupByMarket,
-            'modelsGroupByMarketWithExchange' => $modelsGroupByMarketWithExchange,
+            'markets' => $markets,
             'pieMarketData' => $pieMarketData,
         ]);
     }
