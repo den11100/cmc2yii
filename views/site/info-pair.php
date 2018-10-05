@@ -32,13 +32,6 @@ $this->title = 'Круговая диаграмма обьём торго мон
             </div>
             <hr>
             <?php endforeach; ?>
-
-
-            <?php
-                echo "<pre style='font-size: 10px'>";
-                print_r($modelsGroupByExchange);
-                echo "</pre>";
-            ?>
         </div>
         <div class="col-md-6">
             <h2>Суммарный обьём торгов <?= $symbol ?> на всех биржах за 24 часа разбивка по валютам</h2>
@@ -63,12 +56,6 @@ $this->title = 'Круговая диаграмма обьём торго мон
                 </div>
                 <hr>
             <?php endforeach; ?>
-
-            <?php
-                echo "<pre style='font-size: 10px'>";
-                print_r($modelsGroupByMarket);
-                echo "</pre>";
-            ?>
         </div>
     </div>
 

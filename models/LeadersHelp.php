@@ -162,7 +162,7 @@ class LeadersHelp extends Model
             $a = strtr($item['market'], ['USD'=>'USD', 'USDT'=> 'USD', 'USDC' => 'USD']);
             $result1[$a][] = $item;
         }
-        //VarDumper::dump($result1,7,1);die;
+        //VarDumper::dump($result1,7,1);
 
         $result2 = [];
         foreach ($result1 as $key => $item) {

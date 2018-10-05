@@ -31,8 +31,8 @@ $this->title = 'Лидеры падения и роста';
                         <td><?= round($item['avg_price_old'], 6) ?>$ </td>
                         <td><?= round($item['avg_price'], 6) ?>$ </td>
                         <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
-                        <td><?= round($item['avg_price_old'],6) ?></td>
                         <td><?= round($item['volume'],6) ?></td>
+                        <td><?= round($item['volume_old'],6) ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -58,8 +58,8 @@ $this->title = 'Лидеры падения и роста';
                     <td><?= round($item['avg_price_old'], 6) ?>$ </td>
                     <td><?= round($item['avg_price'], 6) ?>$ </td>
                     <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
-                    <td><?= round($item['avg_price_old'],6) ?></td>
                     <td><?= round($item['volume'],6) ?></td>
+                    <td><?= round($item['volume_old'],6) ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
