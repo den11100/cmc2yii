@@ -17,8 +17,10 @@ $this->title = 'Лидеры падения и роста';
             <thead>
                 <tr>
                     <th>Монета</th>
+                    <th>Предыдущая стоимость</th>
                     <th>Средняя стоимость</th>
                     <th>Процент</th>
+                    <th>Пред. объём торгов, M</th>
                     <th>Объём торгов, M</th>
                 </tr>
             </thead>
@@ -26,10 +28,11 @@ $this->title = 'Лидеры падения и роста';
                 <?php foreach ($listLeadersGrow as $key => $item): ?>
                     <tr>
                         <td><?= $key ?></td>
+                        <td><?= round($item['avg_price_old'], 6) ?>$ </td>
                         <td><?= round($item['avg_price'], 6) ?>$ </td>
                         <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
+                        <td><?= round($item['avg_price_old'],6) ?></td>
                         <td><?= round($item['volume'],6) ?></td>
-                        <td></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -41,8 +44,10 @@ $this->title = 'Лидеры падения и роста';
             <thead>
             <tr>
                 <th>Монета</th>
+                <th>Предыдущая стоимость</th>
                 <th>Средняя стоимость</th>
                 <th>Процент</th>
+                <th>Пред. объём торгов, M</th>
                 <th>Объём торгов, M</th>
             </tr>
             </thead>
@@ -50,14 +55,14 @@ $this->title = 'Лидеры падения и роста';
             <?php foreach ($listLeadersFall as $key => $item): ?>
                 <tr>
                     <td><?= $key ?></td>
+                    <td><?= round($item['avg_price_old'], 6) ?>$ </td>
                     <td><?= round($item['avg_price'], 6) ?>$ </td>
                     <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
+                    <td><?= round($item['avg_price_old'],6) ?></td>
                     <td><?= round($item['volume'],6) ?></td>
-                    <td></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
-
     </div>
 </div>

@@ -170,9 +170,13 @@ class LeadersHelp extends Model
             $avg_price = [];
             $avg_subtraction_price = [];
             $avg_subtraction_price_percent = [];
+            $avg_price_old = [];
+            $volume_old = [];
             foreach ($item as $i) {
+                array_push($volume_old, $i['old_volume']);
                 array_push($volume, $i['volume']);
                 array_push($avg_price, $i['now_avg_price']);
+                array_push($avg_price_old, $i['old_avg_price']);
                 array_push($avg_subtraction_price, $i['subtraction_price']);
                 array_push($avg_subtraction_price_percent, $i['subtraction_price_percent']);
             }
@@ -180,6 +184,8 @@ class LeadersHelp extends Model
             $result2[$key]['avg_price'] = array_sum($avg_price)/count($avg_price);
             $result2[$key]['avg_subtraction_price'] = array_sum($avg_subtraction_price)/count($avg_subtraction_price);
             $result2[$key]['avg_subtraction_price_percent'] = array_sum($avg_subtraction_price_percent)/count($avg_subtraction_price_percent);
+            $result2[$key]['avg_price_old'] = array_sum($avg_price_old)/count($avg_price_old);
+            $result2[$key]['volume_old'] = array_sum($volume_old);
         }
         //VarDumper::dump($result2,7,1);die;
         return $result2;
@@ -187,64 +193,3 @@ class LeadersHelp extends Model
 
 
 } // end class
-
-//
-//$average = array_sum($a)/count($a);
-//echo $average;
-//
-//[
-//    'BTC/USD' => [
-//        0 => [
-//            'id' => '13578'
-//            'high' => '6660'
-//            'low' => '6639.32440003'
-//            'volume' => '22.56518743'
-//            'market' => 'BTC/USD'
-//            'exchange' => 'EXMO'
-//            'timestamp' => '1538697600000'
-//            'interval' => '1d'
-//            'is_have_data' => true
-//            'old_id' => '1'
-//            'old_timestamp' => '1538611200000'
-//            'old_volume' => '19.44609638'
-//            'old_avg_price' => 6642.7666781
-//            'now_avg_price' => 6649.662200015
-//            'subtraction_price' => 6.895521915
-//            'subtraction_price_percent' => 0.104
-//        ]
-//        1 => [
-//            'id' => '13622'
-//            'high' => '6593.8194161'
-//            'low' => '6565.21'
-//            'volume' => '1.12459689'
-//            'market' => 'BTC/USDT'
-//            'exchange' => 'EXMO'
-//            'timestamp' => '1538697600000'
-//            'interval' => '1d'
-//            'is_have_data' => true
-//            'old_id' => '23'
-//            'old_timestamp' => '1538611200000'
-//            'old_volume' => '7.1072622'
-//            'old_avg_price' => 6562.93661562
-//            'now_avg_price' => 6579.51470805
-//            'subtraction_price' => 16.57809243
-//            'subtraction_price_percent' => 0.253
-//        ]
-//        2 => [
-//            'id' => '13634'
-//            'high' => '6660.83004'
-//            'low' => '6640.50447'
-//            'volume' => '73.52894378'
-//            'market' => 'BTC/USD'
-//            'exchange' => 'LiveCoin'
-//            'timestamp' => '1538697600000'
-//            'interval' => '1d'
-//            'is_have_data' => true
-//            'old_id' => '39'
-//            'old_timestamp' => '1538611200000'
-//            'old_volume' => '35.39113967'
-//            'old_avg_price' => 6622.569915
-//            'now_avg_price' => 6650.667255
-//            'subtraction_price' => 28.09734
-//            'subtraction_price_percent' => 0.424
-//        ]
