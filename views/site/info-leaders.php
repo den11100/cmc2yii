@@ -6,22 +6,22 @@
  * @var array $listLeadersFall
  */
 
-$this->title = 'Лидеры падения и роста';
+$this->title = 'Leaders';
 
 ?>
 
 <div class="row">
     <div class="col-md-5">
-        <h2>Лидеры роста</h2>
+        <h2>Grow leaders</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Монета</th>
-                    <th>Предыдущая стоимость</th>
-                    <th>Средняя стоимость</th>
-                    <th>Процент</th>
-                    <th>Пред. объём торгов, M</th>
-                    <th>Объём торгов, M</th>
+                    <th>Currency</th>
+                    <th>Last price</th>
+                    <th>Avg. price</th>
+                    <th>Percent</th>
+                    <th>Volume, M</th>
+                    <th>Volume old, M</th>
                 </tr>
             </thead>
             <?php if ($listLeadersGrow != []): ?>
@@ -48,16 +48,16 @@ $this->title = 'Лидеры падения и роста';
         </table>
     </div>
     <div class="col-md-5">
-        <h2>Лидеры падения</h2>
+        <h2>Fall leaders</h2>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Монета</th>
-                <th>Предыдущая стоимость</th>
-                <th>Средняя стоимость</th>
-                <th>Процент</th>
-                <th>Пред. объём торгов, M</th>
-                <th>Объём торгов, M</th>
+                <th>Currency</th>
+                <th>Last price</th>
+                <th>Avg. price</th>
+                <th>Percent</th>
+                <th>Volume, M</th>
+                <th>Volume old, M</th>
             </tr>
             </thead>
             <?php if ($listLeadersFall != []): ?>
