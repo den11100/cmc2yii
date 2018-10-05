@@ -34,9 +34,7 @@ $this->title = 'Лидеры падения и роста';
                             <td>
                                 <a href="/site/info-pair/<?= $currencyOne;?>">
                                     <?=$currencyOne; ?>
-                                </a>
-                                /
-                                <a href="/site/info-pair/<?= $currencyTwo; ?>">
+                                </a>/<a href="/site/info-pair/<?= $currencyTwo; ?>">
                                     <?=$currencyTwo; ?>
                                 </a>
                             </td>
