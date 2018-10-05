@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\State;
 
-$currencySymbol = str_replace(['/USDT', '/USD'], '', $model['symbol']);
+$currencySymbol = str_replace(['/USDT', '/USDC', '/USD'], '', $model['symbol']);
 $currencies = \yii\helpers\Json::decode(Yii::$app->params['currencies']);
 $currencyName = !empty($currencies[$currencySymbol]) ?
     $currencies[$currencySymbol] : $currencySymbol;

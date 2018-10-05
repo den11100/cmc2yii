@@ -131,11 +131,11 @@ class SiteController extends Controller
             if (count($models) > 1){
                 $prices = 0;
                 foreach ($models as $model){
-                    $prices += $model['last'];
+                    $prices += $model->last;
                     $lastModel = $model;
                 }
                 $price = $prices/count($models);
-                $lastModel['last'] = $price;
+                $lastModel->last = $price;
                 $finalModels[$symbol] = $lastModel;
             } else {
                 $finalModels[$symbol] = $models[0];
@@ -144,7 +144,7 @@ class SiteController extends Controller
 
 
         $dataProvider = new ArrayDataProvider([
-            'models' => $finalModels,
+            'allModels' => $finalModels,
             'pagination' => [
                 'pageSize' => 10,
             ],
