@@ -74,7 +74,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container" style="min-height: 800px;">
+    <div class="container" style="min-height: 950px;">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

@@ -47,7 +47,7 @@ $this->title = 'Leaders';
             <?php endif ?>
         </table>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5" style="margin-left: 5%;">
         <h2>Fall leaders</h2>
         <table class="table table-striped">
             <thead>
@@ -64,7 +64,14 @@ $this->title = 'Leaders';
                 <tbody>
                 <?php foreach ($listLeadersFall as $key => $item): ?>
                     <tr>
-                        <td><?= $key ?></td>
+                        <?php $currencies = explode('/', $key);?>
+                        <?php $currencyOne = $currencies[0];?>
+                        <?php $currencyTwo = $currencies[1];?>
+                        <td style="width: 300px; min-width: 300px;">
+                            <a href="/site/info-pair/<?= $currencyOne;?>">
+                                <?=$currencyOne; ?>
+                            </a>/ <?=$currencyTwo; ?>
+                        </td>
                         <td><?= round($item['avg_price_old'], 6) ?>$ </td>
                         <td><?= round($item['avg_price'], 6) ?>$ </td>
                         <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
