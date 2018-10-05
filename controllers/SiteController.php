@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Cctx;
 use app\models\CctxSearch;
 use app\models\Help;
+use app\models\LeadersHelp;
 use app\models\State;
 use app\models\StateTest;
 use ccxt\Exchange;
@@ -16,6 +17,7 @@ use yii\db\Connection;
 use yii\db\Exception;
 use yii\db\Expression;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
@@ -207,12 +209,21 @@ class SiteController extends Controller
         ]);
     }
 
-    public function infoLeaders()
+    public function actionInfoLeaders()
     {
-        $xxx = '';
+        $listLeaders = LeadersHelp::getLeaders();
+
+        if ($listLeaders != []) {
+            $listLeadersGrow = LeadersHelp::getLeadersGrow($listLeaders, Yii::$app->params['number-of-leaders']);
+            $listLeadersFall = LeadersHelp::getLeadersFall($listLeaders, Yii::$app->params['number-of-leaders']);
+        }
+
+
+
+
 
         return $this->render('info-leaders', [
-            'xxx' => $xxx,
+            //'xxx' => $xxx,
         ]);
     }
 
