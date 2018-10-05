@@ -31,7 +31,7 @@ $this->title = 'Лидеры падения и роста';
                         <?php $currencyOne = $currencies[0];?>
                         <?php $currencyTwo = $currencies[1];?>
                         <tr>
-                            <td>
+                            <td style="width: 300px; min-width: 300px;">
                                 <a href="/site/info-pair/<?= $currencyOne;?>">
                                     <?=$currencyOne; ?>
                                 </a>/<a href="/site/info-pair/<?= $currencyTwo; ?>">
