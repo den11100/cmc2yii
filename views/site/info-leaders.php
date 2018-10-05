@@ -34,9 +34,7 @@ $this->title = 'Лидеры падения и роста';
                             <td style="width: 300px; min-width: 300px;">
                                 <a href="/site/info-pair/<?= $currencyOne;?>">
                                     <?=$currencyOne; ?>
-                                </a>/<a href="/site/info-pair/<?= $currencyTwo; ?>">
-                                    <?=$currencyTwo; ?>
-                                </a>
+                                </a>/<?=$currencyTwo; ?>
                             </td>
                             <td><?= round($item['avg_price_old'], 6) ?>$ </td>
                             <td><?= round($item['avg_price'], 6) ?>$ </td>
