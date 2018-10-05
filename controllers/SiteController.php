@@ -107,6 +107,7 @@ class SiteController extends Controller
         $result = Cctx::find()
             ->select('id')
             ->where(['LIKE', 'symbol', '/USD',])
+            ->andWhere(['NOT LIKE', 'symbol', 'FORTYTWO',])
             ->andWhere(['>', 'last', 0])
             ->groupBy('symbol')
             ->orderBy('timestamp desc')
@@ -119,13 +120,31 @@ class SiteController extends Controller
 
         $models = $query->all();
 
-        $symbols = [];
+        $newModels = [];
         foreach ($models as $model){
-            $symbols[] = str_replace(['/USDT', '/USD'], '', $model->symbol);
+            $symbol = str_replace(['/USDT', '/USDC', '/USD'], '', $model->symbol);
+            $newModels[$symbol][] = $model;
         }
 
+        $finalModels = [];
+        foreach ($newModels as $symbol => $models){
+            if (count($models) > 1){
+                $prices = 0;
+                foreach ($models as $model){
+                    $prices += $model['last'];
+                    $lastModel = $model;
+                }
+                $price = $prices/count($models);
+                $lastModel['last'] = $price;
+                $finalModels[$symbol] = $lastModel;
+            } else {
+                $finalModels[$symbol] = $models[0];
+            }
+        }
+
+
         $dataProvider = new ArrayDataProvider([
-            'models' => $models,
+            'models' => $finalModels,
             'pagination' => [
                 'pageSize' => 10,
             ],
