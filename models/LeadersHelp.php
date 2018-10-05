@@ -114,14 +114,81 @@ class LeadersHelp extends Model
         return $list;
     } // end method
 
+
     public static function getLeadersGrow($listLeaders, $number)
     {
-
+        $resultList = self::makeListLeadersUpOrDown($listLeaders, 'up');
+        $resultListGrouped = self::groupedByMarkets($resultList);
+        //TODO доделать Количество отображаемых лидеров роста $number
+        return $resultListGrouped;
     }
 
     public static function getLeadersFall($listLeaders, $number)
     {
+        $resultList = self::makeListLeadersUpOrDown($listLeaders, 'down');
+        $resultListGrouped = self::groupedByMarkets($resultList);
+        //TODO доделать Количество отображаемых лидеров падения $number
+        return $resultListGrouped;
+    }
 
+    /**
+     * @param array $listLeaders
+     * @param string $type
+     * @return array
+     */
+    private static function makeListLeadersUpOrDown($listLeaders, $type)
+    {
+        if ($type == 'up') {
+            foreach ($listLeaders as $key => $item) {
+                if ($item['subtraction_price'] < 0) {
+                    unset($listLeaders[$key]);
+                }
+            }
+        }
+        if ($type == 'down') {
+            foreach ($listLeaders as $key => $item) {
+                if ($item['subtraction_price'] > 0) {
+                    unset($listLeaders[$key]);
+                }
+            }
+        }
+        return $listLeaders;
+    }
+
+    private static function groupedByMarkets($list)
+    {
+        $result1 = [];
+        foreach ($list as $key => $item) {
+            $a = strtr($item['market'], ['USD'=>'USD', 'USDT'=> 'USD', 'USDC' => 'USD']);
+            $result1[$a][] = $item;
+        }
+        //VarDumper::dump($result1,7,1);
+
+        $result2 = [];
+        foreach ($result1 as $key => $item) {
+            $volume = [];
+            $avg_price = [];
+            $avg_subtraction_price = [];
+            $avg_subtraction_price_percent = [];
+            $avg_price_old = [];
+            $volume_old = [];
+            foreach ($item as $i) {
+                array_push($volume_old, $i['old_volume']);
+                array_push($volume, $i['volume']);
+                array_push($avg_price, $i['now_avg_price']);
+                array_push($avg_price_old, $i['old_avg_price']);
+                array_push($avg_subtraction_price, $i['subtraction_price']);
+                array_push($avg_subtraction_price_percent, $i['subtraction_price_percent']);
+            }
+            $result2[$key]['volume'] = array_sum($volume);
+            $result2[$key]['avg_price'] = array_sum($avg_price)/count($avg_price);
+            $result2[$key]['avg_subtraction_price'] = array_sum($avg_subtraction_price)/count($avg_subtraction_price);
+            $result2[$key]['avg_subtraction_price_percent'] = array_sum($avg_subtraction_price_percent)/count($avg_subtraction_price_percent);
+            $result2[$key]['avg_price_old'] = array_sum($avg_price_old)/count($avg_price_old);
+            $result2[$key]['volume_old'] = array_sum($volume_old);
+        }
+        //VarDumper::dump($result2,7,1);die;
+        return $result2;
     }
 
 
