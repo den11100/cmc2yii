@@ -114,15 +114,137 @@ class LeadersHelp extends Model
         return $list;
     } // end method
 
+
     public static function getLeadersGrow($listLeaders, $number)
     {
-
+        $resultList = self::makeListLeadersUpOrDown($listLeaders, 'up');
+        $resultListGrouped = self::groupedByMarkets($resultList);
+        //TODO доделать Количество отображаемых лидеров роста $number
+        return $resultListGrouped;
     }
 
     public static function getLeadersFall($listLeaders, $number)
     {
+        $resultList = self::makeListLeadersUpOrDown($listLeaders, 'down');
+        $resultListGrouped = self::groupedByMarkets($resultList);
+        //TODO доделать Количество отображаемых лидеров падения $number
+        return $resultListGrouped;
+    }
 
+    /**
+     * @param array $listLeaders
+     * @param string $type
+     * @return array
+     */
+    private static function makeListLeadersUpOrDown($listLeaders, $type)
+    {
+        if ($type == 'up') {
+            foreach ($listLeaders as $key => $item) {
+                if ($item['subtraction_price'] < 0) {
+                    unset($listLeaders[$key]);
+                }
+            }
+        }
+        if ($type == 'down') {
+            foreach ($listLeaders as $key => $item) {
+                if ($item['subtraction_price'] > 0) {
+                    unset($listLeaders[$key]);
+                }
+            }
+        }
+        return $listLeaders;
+    }
+
+    private static function groupedByMarkets($list)
+    {
+        $result1 = [];
+        foreach ($list as $key => $item) {
+            $a = strtr($item['market'], ['USD'=>'USD', 'USDT'=> 'USD', 'USDC' => 'USD']);
+            $result1[$a][] = $item;
+        }
+        //VarDumper::dump($result1,7,1);die;
+
+        $result2 = [];
+        foreach ($result1 as $key => $item) {
+            $volume = [];
+            $avg_price = [];
+            $avg_subtraction_price = [];
+            $avg_subtraction_price_percent = [];
+            foreach ($item as $i) {
+                array_push($volume, $i['volume']);
+                array_push($avg_price, $i['now_avg_price']);
+                array_push($avg_subtraction_price, $i['subtraction_price']);
+                array_push($avg_subtraction_price_percent, $i['subtraction_price_percent']);
+            }
+            $result2[$key]['volume'] = array_sum($volume);
+            $result2[$key]['avg_price'] = array_sum($avg_price)/count($avg_price);
+            $result2[$key]['avg_subtraction_price'] = array_sum($avg_subtraction_price)/count($avg_subtraction_price);
+            $result2[$key]['avg_subtraction_price_percent'] = array_sum($avg_subtraction_price_percent)/count($avg_subtraction_price_percent);
+        }
+        //VarDumper::dump($result2,7,1);die;
+        return $result2;
     }
 
 
 } // end class
+
+//
+//$average = array_sum($a)/count($a);
+//echo $average;
+//
+//[
+//    'BTC/USD' => [
+//        0 => [
+//            'id' => '13578'
+//            'high' => '6660'
+//            'low' => '6639.32440003'
+//            'volume' => '22.56518743'
+//            'market' => 'BTC/USD'
+//            'exchange' => 'EXMO'
+//            'timestamp' => '1538697600000'
+//            'interval' => '1d'
+//            'is_have_data' => true
+//            'old_id' => '1'
+//            'old_timestamp' => '1538611200000'
+//            'old_volume' => '19.44609638'
+//            'old_avg_price' => 6642.7666781
+//            'now_avg_price' => 6649.662200015
+//            'subtraction_price' => 6.895521915
+//            'subtraction_price_percent' => 0.104
+//        ]
+//        1 => [
+//            'id' => '13622'
+//            'high' => '6593.8194161'
+//            'low' => '6565.21'
+//            'volume' => '1.12459689'
+//            'market' => 'BTC/USDT'
+//            'exchange' => 'EXMO'
+//            'timestamp' => '1538697600000'
+//            'interval' => '1d'
+//            'is_have_data' => true
+//            'old_id' => '23'
+//            'old_timestamp' => '1538611200000'
+//            'old_volume' => '7.1072622'
+//            'old_avg_price' => 6562.93661562
+//            'now_avg_price' => 6579.51470805
+//            'subtraction_price' => 16.57809243
+//            'subtraction_price_percent' => 0.253
+//        ]
+//        2 => [
+//            'id' => '13634'
+//            'high' => '6660.83004'
+//            'low' => '6640.50447'
+//            'volume' => '73.52894378'
+//            'market' => 'BTC/USD'
+//            'exchange' => 'LiveCoin'
+//            'timestamp' => '1538697600000'
+//            'interval' => '1d'
+//            'is_have_data' => true
+//            'old_id' => '39'
+//            'old_timestamp' => '1538611200000'
+//            'old_volume' => '35.39113967'
+//            'old_avg_price' => 6622.569915
+//            'now_avg_price' => 6650.667255
+//            'subtraction_price' => 28.09734
+//            'subtraction_price_percent' => 0.424
+//        ]

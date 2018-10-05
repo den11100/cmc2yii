@@ -218,12 +218,9 @@ class SiteController extends Controller
             $listLeadersFall = LeadersHelp::getLeadersFall($listLeaders, Yii::$app->params['number-of-leaders']);
         }
 
-
-
-
-
         return $this->render('info-leaders', [
-            //'xxx' => $xxx,
+            'listLeadersGrow' => $listLeadersGrow,
+            'listLeadersFall' => $listLeadersFall,
         ]);
     }
 
