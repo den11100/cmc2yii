@@ -213,6 +213,9 @@ class SiteController extends Controller
     {
         $listLeaders = LeadersHelp::getLeaders();
 
+        $listLeadersGrow = [];
+        $listLeadersFall = [];
+
         if ($listLeaders != []) {
             $listLeadersGrow = LeadersHelp::getLeadersGrow($listLeaders, Yii::$app->params['number-of-leaders']);
             $listLeadersFall = LeadersHelp::getLeadersFall($listLeaders, Yii::$app->params['number-of-leaders']);

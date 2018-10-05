@@ -24,18 +24,20 @@ $this->title = 'Лидеры падения и роста';
                     <th>Объём торгов, M</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php foreach ($listLeadersGrow as $key => $item): ?>
-                    <tr>
-                        <td><?= $key ?></td>
-                        <td><?= round($item['avg_price_old'], 6) ?>$ </td>
-                        <td><?= round($item['avg_price'], 6) ?>$ </td>
-                        <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
-                        <td><?= round($item['volume'],6) ?></td>
-                        <td><?= round($item['volume_old'],6) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
+            <?php if ($listLeadersGrow != []): ?>
+                <tbody>
+                    <?php foreach ($listLeadersGrow as $key => $item): ?>
+                        <tr>
+                            <td><?= $key ?></td>
+                            <td><?= round($item['avg_price_old'], 6) ?>$ </td>
+                            <td><?= round($item['avg_price'], 6) ?>$ </td>
+                            <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
+                            <td><?= round($item['volume'],6) ?></td>
+                            <td><?= round($item['volume_old'],6) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            <?php endif ?>
         </table>
     </div>
     <div class="col-md-5">
@@ -51,18 +53,20 @@ $this->title = 'Лидеры падения и роста';
                 <th>Объём торгов, M</th>
             </tr>
             </thead>
-            <tbody>
-            <?php foreach ($listLeadersFall as $key => $item): ?>
-                <tr>
-                    <td><?= $key ?></td>
-                    <td><?= round($item['avg_price_old'], 6) ?>$ </td>
-                    <td><?= round($item['avg_price'], 6) ?>$ </td>
-                    <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
-                    <td><?= round($item['volume'],6) ?></td>
-                    <td><?= round($item['volume_old'],6) ?></td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
+            <?php if ($listLeadersFall != []): ?>
+                <tbody>
+                <?php foreach ($listLeadersFall as $key => $item): ?>
+                    <tr>
+                        <td><?= $key ?></td>
+                        <td><?= round($item['avg_price_old'], 6) ?>$ </td>
+                        <td><?= round($item['avg_price'], 6) ?>$ </td>
+                        <td><?= round($item['avg_subtraction_price_percent'],2) ?>%</td>
+                        <td><?= round($item['volume'],6) ?></td>
+                        <td><?= round($item['volume_old'],6) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            <?php endif ?>
         </table>
     </div>
 </div>
