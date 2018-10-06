@@ -55,7 +55,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'BTC PIE', 'url' => ['/site/info-pair/btc']],
+            #['label' => 'BTC PIE', 'url' => ['/site/info-pair/btc']],
             ['label' => 'Leaders', 'url' => ['/site/info-leaders']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
