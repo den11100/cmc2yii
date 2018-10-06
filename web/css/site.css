@@ -291,3 +291,8 @@ td.visual-td>div{
     border: 1px solid black;
     background: white;
 }
+
+.sm{
+    font-size: 10px;
+    color: #7b7b7b;
+}

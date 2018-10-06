@@ -132,7 +132,7 @@ class State extends \yii\db\ActiveRecord
             return null;
         }
 
-        $percent = round((1 - $valueCurrent / $valueThat) * 100, 2);
+        $percent = round((1 - $valueThat / $valueCurrent) * 100, 2);
 
         if ($percent > 0){
             $percent = '+' . $percent;
@@ -140,7 +140,9 @@ class State extends \yii\db\ActiveRecord
             $percent = '-' . (-1)*$percent;
         }
 
-        return  $percent . '%';
+        $diff = $valueCurrent-$valueThat;
+
+        return  '<span class="bd">'.$percent . '%</span>' . "&nbsp;<span class=\"sm\">(".round($diff, 2)."$)</span>";
     }
 
     public static function getPercentGradation($valueCurrent, $valueThat)
