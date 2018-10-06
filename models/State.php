@@ -62,7 +62,6 @@ class State extends \yii\db\ActiveRecord
                 ->all();
         }
 
-
         $statesByTimeAndSymbols = [];
         foreach (self::$states as $time => $states){
             /** @var State $state */
@@ -84,12 +83,12 @@ class State extends \yii\db\ActiveRecord
 
     public static function getAvgValue($tm, $symbol)
     {
-        return isset(self::$values[$tm][$symbol]['value']) ? self::$values[$tm][$symbol]['value'] : null;
+        return isset(self::$values[$tm][$symbol]) ? self::$values[$tm][$symbol] : null;
     }
 
     public static function getVolume($tm, $symbol)
     {
-        return isset(self::$values[$tm][$symbol]['volume']) ? self::$values[$tm][$symbol]['volume'] : null;
+        return isset(self::$volumes[$tm][$symbol]) ? self::$volumes[$tm][$symbol] : null;
     }
 
     public static function hydrate($value)
