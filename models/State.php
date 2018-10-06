@@ -151,7 +151,7 @@ class State extends \yii\db\ActiveRecord
             return null;
         }
 
-        $percent = round((1 - $valueCurrent / $valueThat) * 100, 2);
+        $percent = round((1 - $valueThat / $valueCurrent) * 100, 2);
 
         if (!$percent){
             return null;
