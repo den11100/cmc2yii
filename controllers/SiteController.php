@@ -137,8 +137,10 @@ class SiteController extends Controller
                 $price = $prices/count($models);
                 $lastModel->last = $price;
                 $finalModels[$symbol] = $lastModel;
+                if ($symbol == 'BTC') Cctx::$BTC_CURRENT = $lastModel->last;
             } else {
                 $finalModels[$symbol] = $models[0];
+                if ($symbol == 'BTC') Cctx::$BTC_CURRENT = $models[0]->last;
             }
         }
 
@@ -146,7 +148,7 @@ class SiteController extends Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $finalModels,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 20,
             ],
         ]);
 

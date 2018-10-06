@@ -50,7 +50,7 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
         <?= '$ '.number_format($model['last'], 4); ?>
     </td>
     <td class="digital-td btc-td">
-        <?= number_format($model['last']/6495, 4); ?>
+        <?= number_format($model['last']/\app\models\Cctx::$BTC_CURRENT, 4); ?>
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('1h', $currencySymbol));?>">
         <?= State::hydratePercent($model['last'], State::getAvgValue('1h', $currencySymbol)); ?>

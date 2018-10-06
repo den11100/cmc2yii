@@ -15,6 +15,8 @@ use Yii;
  */
 class Cctx extends \yii\db\ActiveRecord
 {
+    static public $BTC_CURRENT = 6576.79;
+
     /**
      * {@inheritdoc}
      */
