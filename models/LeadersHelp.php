@@ -119,16 +119,28 @@ class LeadersHelp extends Model
     {
         $resultList = self::makeListLeadersUpOrDown($listLeaders, 'up');
         $resultListGrouped = self::groupedByMarkets($resultList);
-        //TODO доделать Количество отображаемых лидеров роста $number
-        return $resultListGrouped;
+
+        uasort($resultListGrouped, function ($a, $b) {
+            return ($a['avg_subtraction_price_percent'] < $b['avg_subtraction_price_percent']);
+        });
+
+        $result = array_slice($resultListGrouped, 0, $number);
+
+        return $result;
     }
 
     public static function getLeadersFall($listLeaders, $number)
     {
         $resultList = self::makeListLeadersUpOrDown($listLeaders, 'down');
         $resultListGrouped = self::groupedByMarkets($resultList);
-        //TODO доделать Количество отображаемых лидеров падения $number
-        return $resultListGrouped;
+
+        uasort($resultListGrouped, function ($a, $b) {
+            return ($a['avg_subtraction_price_percent'] > $b['avg_subtraction_price_percent']);
+        });
+
+        $result = array_slice($resultListGrouped, 0, $number);
+
+        return $result;
     }
 
     /**

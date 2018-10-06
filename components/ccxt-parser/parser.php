@@ -7,7 +7,7 @@
 	DB::$settings = array(
 		'hostname'	=>	'localhost',
 		'username'	=>	'root',
-		'password'	=>	'mysql',
+		'password'	=>	'111111',
 		'db_name'	=>	'cmc2test'
 	);
 	
