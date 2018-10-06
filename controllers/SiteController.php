@@ -102,6 +102,51 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $array = [
+            'DASH/USD' => [
+                'volume' => 378.0024276,
+                'avg_price' => 182.46685216167,
+                'avg_subtraction_price' => 0.92121733666667,
+                'avg_subtraction_price_percent' => 0.50766666666667,
+                'avg_price_old' => 181.545634825,
+                'volume_old' => 698.6155468,
+                    ],
+            'BCH/USD' => [
+                'volume' => 24.37375161,
+                'avg_price' => 522.08019,
+                'avg_subtraction_price' => 1.520005,
+                'avg_subtraction_price_percent' => 0.292,
+                'avg_price_old' => 520.560185,
+                'volume_old' => 6.31689349,
+            ],
+            'ADA/USD' => [
+                'volume' => 47051.6389224,
+                'avg_price' => 0.08292749,
+                'avg_subtraction_price' => 0.000205995,
+                'avg_subtraction_price_percent' => 0.249,
+                'avg_price_old' => 0.082721495,
+                'volume_old' => 26330.15637316,
+            ],
+            'EOS/USD' => [
+                'volume' => 10400.73182585,
+                'avg_price' => 5.8549326725,
+                'avg_subtraction_price' => 0.070853195,
+                'avg_subtraction_price_percent' => 1.2185,
+                'avg_price_old' => 5.7840794775,
+                'volume_old' => 18210.52597203,
+            ],
+        ];
+        VarDumper::dump($array,3,1);
+        uasort($array, function ($a, $b){
+            if ($a['avg_subtraction_price_percent'] == $b['avg_subtraction_price_percent']) {
+                return 0;
+            }
+            return ($a['avg_subtraction_price_percent'] < $b['avg_subtraction_price_percent']) ? -1 : 1;
+        });
+        VarDumper::dump($array,3,1);
+
+
+        die();
         State::prepareStates();
 
         $result = Cctx::find()
