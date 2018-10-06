@@ -155,8 +155,8 @@ td.digital-td{
     width: 60px;
 }
 td.visual-td{
-    width: 150px;
-    max-width: 150px;
+    width: 160px !important;
+    max-width: 160px;
     padding: 0px !important;
 }
 td.visual-td>div{
@@ -172,8 +172,8 @@ td.visual-td>div{
     text-align: right;
 }
 .btc-td, .name-td{
-    width: 210px !important;
-    max-width: 210px;
+    width: 80px !important;
+    max-width: 80px;
 }
 .main-table td{
     max-height: 60px;
