@@ -4,10 +4,12 @@
 	date_default_timezone_set('Europe/Moscow');	
 	include 'ccxt/ccxt.php';
 
+    $localDbConfig = require  __DIR__ . '/../../config/db.local.php';
+
 	DB::$settings = array(
 		'hostname'	=>	'localhost',
-		'username'	=>	'root',
-		'password'	=>	'111111',
+		'username'	=>	$localDbConfig['username'],
+		'password'	=>	$localDbConfig['password'],
 		'db_name'	=>	'cmc2test'
 	);
 	

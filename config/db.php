@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\ArrayHelper;
 
 $localConfigPath = __DIR__ . DIRECTORY_SEPARATOR . 'db.local.php';
 
@@ -22,4 +21,4 @@ $config = [
     //'schemaCache' => 'cache',
 ];
 
-return ArrayHelper::merge($config, $localConfig);
+return \yii\helpers\ArrayHelper::merge($config, $localConfig);
