@@ -10,7 +10,7 @@
  * @var string $pieMarketData
  */
 
-$this->title = 'Круговая диаграмма обьём торго монеты за 24 часа по биржам';
+$this->title = 'Volume 24 by exchange';
 
 ?>
 
@@ -18,7 +18,7 @@ $this->title = 'Круговая диаграмма обьём торго мон
 
     <div class="row">
         <div class="col-md-6">
-            <h2>Суммарный обьём торгов <?= $symbol ?>/USD разбивка по биржам за 24 часа</h2>
+            <h2>Volume <?= $symbol ?>/USD 24 by exchange </h2>
             <div id="volume-per-exchange" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
             <?php foreach ($modelsGroupByExchange as $model): ?>
@@ -34,7 +34,7 @@ $this->title = 'Круговая диаграмма обьём торго мон
             <?php endforeach; ?>
         </div>
         <div class="col-md-6">
-            <h2>Суммарный обьём торгов <?= $symbol ?> на всех биржах за 24 часа разбивка по валютам</h2>
+            <h2>Volume <?= $symbol ?> 24 by currency</h2>
             <div id="market" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
             <?php foreach ($markets as $key => $market): ?>
