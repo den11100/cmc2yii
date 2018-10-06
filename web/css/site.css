@@ -299,3 +299,7 @@ td.visual-td>div{
 .sm{
     font-size: 10px;
 }
+.icon{
+    width: 16px;
+    max-width: 16px;
+}

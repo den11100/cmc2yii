@@ -44,6 +44,7 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
     </td>-->
     <td class="digital-td name-td"><a href="/site/info-pair/<?= $currencySymbol; ?>"><?= $currencyName; ?></a></td>
     <td class="digital-td">
+        <img src="/icons/<?= strtolower($currencySymbol)?>.png" class="icon" alt="<?= $currencySymbol; ?>">
         <?= $currencySymbol; ?>
     </td>
     <td class="digital-td">
