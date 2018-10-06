@@ -38,6 +38,7 @@ $(document).ready(function () {
         // Create the chart
         Highcharts.chart(id, chartOptions);
     });
+
     $(".close, .popup").on("click", function(){
         $(".popup, .popup-content").removeClass("active");
     });

@@ -21,6 +21,7 @@ class State extends \yii\db\ActiveRecord
 {
     public static $states = [];
     public static $values = [];
+    public static $volumes = [];
 
     /**
      * {@inheritdoc}
@@ -32,64 +33,26 @@ class State extends \yii\db\ActiveRecord
 
     public static function prepareStates()
     {
-        $times = [
-            '1h' => [
-                'from' => (time()-2*60*60)*1000,
-                'to' => (time() - 60)*1000,
-            ],
-            '24h' => [
-                'from' => (time()-24*60*60)*1000,
-                'to' => (time() - 2*60*60)*1000,
-            ],
-            '2d' => [
-                'from' => (time()-2*24*60*60)*1000,
-                'to' => (time() - 24*60*60)*1000,
-            ],
-            '3d' => [
-                'from' => (time()-3*24*60*60)*1000,
-                'to' => (time() - 2*24*60*60)*1000,
-            ],
-            '4d' => [
-                'from' => (time()-4*24*60*60)*1000,
-                'to' => (time() - 3*24*60*60)*1000,
-            ],
-            '5d' => [
-                'from' => (time()-5*24*60*60)*1000,
-                'to' => (time() - 4*24*60*60)*1000,
-            ],
-            '6d' => [
-                'from' => (time()-6*24*60*60)*1000,
-                'to' => (time() - 5*24*60*60)*1000,
-            ],
-            '7d' => [
-                'from' => (time()-7*24*60*60)*1000,
-                'to' => (time() - 24*60*60)*1000,
-            ],
-            '14d' => [
-                'from' => (time() - 14*24*60*60)*1000,
-                'to' => (time()-7*24*60*60)*1000,
-            ],
-            '30d' => [
-                'from' => (time()-30*24*60*60)*1000,
-                'to' => (time() - 14*24*60*60)*1000,
-            ],
-            '45d' => [
-                'from' => (time()-45*24*60*60)*1000,
-                'to' => (time() - 14*24*60*60)*1000,
-            ],
-            '60d' => [
-                'from' => (time()-60*24*60*60)*1000,
-                'to' => (time() - 45*24*60*60)*1000,
-            ],
-            '90d' => [
-                'from' => (time()-90*24*60*60)*1000,
-                'to' => (time() - 60*24*60*60)*1000,
-            ],
-            '200d' => [
-                'from' => (time()-200*24*60*60)*1000,
-                'to' => (time() - 90*24*60*60)*1000,
-            ],
-        ];
+        $times = [];
+        $times['0d']['to'] = (time() - 60)*1000;
+        $times['0d']['from'] = (time()-2*60*60)*1000;
+
+        $times['1d']['to'] = (time() - 2*60*60)*1000;
+        $times['1d']['from'] = (time()-1*24*60*60)*1000;
+
+        for ($i = 2; $i <= 30; $i++){
+            $times[$i.'d']['to'] = (time() - ($i+1)*24*60*60)*1000;
+            $times[$i.'d']['from'] = (time()-($i)*24*60*60)*1000;
+        }
+
+        $times['45d']['to'] = (time() - 14*24*60*60)*1000;
+        $times['45d']['from'] = (time()-45*24*60*60)*1000;
+
+        $times['90d']['to'] = (time() - 60*24*60*60)*1000;
+        $times['90d']['from'] = (time()-90*24*60*60)*1000;
+
+        $times['200d']['to'] = (time() - 90*24*60*60)*1000;
+        $times['200d']['from'] = (time()-200*24*60*60)*1000;
 
         foreach ($times as $time => $values){
             self::$states[$time] = State::find()
@@ -99,26 +62,34 @@ class State extends \yii\db\ActiveRecord
                 ->all();
         }
 
+
         $statesByTimeAndSymbols = [];
         foreach (self::$states as $time => $states){
             /** @var State $state */
             foreach ($states as $state){
                 if (!empty($state)){
-                    $statesByTimeAndSymbols[$time][$state->getSymbol()][] = $state->getMiddleValue();
+                    $statesByTimeAndSymbols[$time][$state->getSymbol()]['value'][] = $state->getMiddleValue();
+                    $statesByTimeAndSymbols[$time][$state->getSymbol()]['volume'][] = $state->volume;
                 }
             }
         }
 
         foreach ($statesByTimeAndSymbols as $time => $statesBySymbols){
             foreach ($statesBySymbols as $symbol => $states){
-                self::$values[$time][$symbol] = array_sum($states) / count($states);
+                self::$values[$time][$symbol] = array_sum($states['value']) / count($states['value']);
+                self::$volumes[$time][$symbol] = array_sum($states['volume']) / count($states['volume']);
             }
         }
     }
 
     public static function getAvgValue($tm, $symbol)
     {
-        return isset(self::$values[$tm][$symbol]) ? self::$values[$tm][$symbol] : null;
+        return isset(self::$values[$tm][$symbol]['value']) ? self::$values[$tm][$symbol]['value'] : null;
+    }
+
+    public static function getVolume($tm, $symbol)
+    {
+        return isset(self::$values[$tm][$symbol]['volume']) ? self::$values[$tm][$symbol]['volume'] : null;
     }
 
     public static function hydrate($value)
@@ -181,6 +152,11 @@ class State extends \yii\db\ActiveRecord
         if ($percent > 0){
             return $start;
         }
+    }
+
+    public static function getThirtyDaysPlot($symbol)
+    {
+
     }
 
     public function getSymbol()

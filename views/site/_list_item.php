@@ -16,7 +16,7 @@ $currencyName = !empty($currencies[$currencySymbol]) ?
 
 
 $sevenDaysPlot = implode(', ', [
-    (float)State::getAvgValue('24h', $currencySymbol),
+    (float)State::getAvgValue('1d', $currencySymbol),
     (float)State::getAvgValue('2d', $currencySymbol),
     (float)State::getAvgValue('3d', $currencySymbol),
     (float)State::getAvgValue('4d', $currencySymbol),
@@ -25,15 +25,12 @@ $sevenDaysPlot = implode(', ', [
     (float)State::getAvgValue('7d', $currencySymbol),
 ]);
 
-$twoHundredDaysPlot = implode(', ', [
-    (float)State::getAvgValue('200d', $currencySymbol),
-    (float)State::getAvgValue('90d', $currencySymbol),
-    (float)State::getAvgValue('45d', $currencySymbol),
-    (float)State::getAvgValue('30d', $currencySymbol),
-    (float)State::getAvgValue('14d', $currencySymbol),
-    (float)State::getAvgValue('7d', $currencySymbol),
-    (float)State::getAvgValue('24h', $currencySymbol),
-]);
+$thirtyDaysPlot = [];
+for($i = 0; $i <= 30; $i++)
+{
+    $thirtyDaysPlot[] = (float)State::getAvgValue($i.'d', $currencySymbol);
+}
+$thirtyDaysPlot = implode(',', $thirtyDaysPlot);
 
 $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."]);");
 
@@ -60,15 +57,15 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
     <td class="digital-td btc-td">
         <?= number_format($model['last']/Cctx::$BTC_CURRENT, 4); ?>
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('1h', $currencySymbol)); ?>">
-        <?= State::hydratePercent($model['last'], State::getAvgValue('1h', $currencySymbol)); ?>
+    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('0d', $currencySymbol)); ?>">
+        <?= State::hydratePercent($model['last'], State::getAvgValue('0d', $currencySymbol)); ?>
         <br>
-        <?= State::hydrate(State::getAvgValue('1h', $currencySymbol)); ?>
+        <?= State::hydrate(State::getAvgValue('0d', $currencySymbol)); ?>
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('24h', $currencySymbol)); ?>">
-        <?= State::hydratePercent($model['last'], State::getAvgValue('24h', $currencySymbol)); ?>
+    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('1d', $currencySymbol)); ?>">
+        <?= State::hydratePercent($model['last'], State::getAvgValue('1d', $currencySymbol)); ?>
         <br>
-        <?= State::hydrate(State::getAvgValue('24h', $currencySymbol)); ?>
+        <?= State::hydrate(State::getAvgValue('1d', $currencySymbol)); ?>
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('7d', $currencySymbol)); ?>">
         <?= State::hydratePercent($model['last'], State::getAvgValue('7d', $currencySymbol)); ?>
@@ -100,7 +97,7 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
         <br>
         <?= State::hydrate(State::getAvgValue('200d', $currencySymbol)); ?>
     </td>
-    <td class="visual-td" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= $twoHundredDaysPlot; ?>]">
+    <td class="visual-td" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= $thirtyDaysPlot; ?>]">
         <div id="container-<?= $model['id'];?>" class="chart7d"></div>
     </td>
 </tr>
