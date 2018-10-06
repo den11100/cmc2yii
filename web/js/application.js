@@ -8,6 +8,8 @@ $(document).ready(function () {
         $(".popup, .popup-content").addClass("active");
         var id = $(this).data('id');
         var data = $(this).data('data');
+        var dataColumns = $(this).data('columns');
+        console.log(dataColumns);
         chartOptions = {
             title: '',
             plotOptions: {
@@ -31,7 +33,12 @@ $(document).ready(function () {
             },
             series: [{
                 name: '',
+                type: 'spline',
                 data: data,
+            }, {
+                name: '',
+                type: 'column',
+                data: dataColumns,
             }],
         };
 
@@ -55,6 +62,7 @@ window.openGraph = function(id, data)
         plotOptions: {
             series: {
                 showInLegend: false,
+                type: 'spline',
                 label: {
                     connectorAllowed: false
                 },

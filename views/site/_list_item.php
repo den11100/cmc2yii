@@ -32,6 +32,15 @@ for($i = 0; $i <= 30; $i++)
 }
 $thirtyDaysPlot = implode(',', $thirtyDaysPlot);
 
+
+$thirtyDaysColumnsPlot = [];
+for($i = 0; $i <= 30; $i++)
+{
+    $thirtyDaysColumnsPlot[] = (float)State::getVolume($i.'d', $currencySymbol);
+}
+$thirtyDaysColumnsPlot = implode(',', $thirtyDaysColumnsPlot);
+
+
 $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."]);");
 
 
@@ -97,7 +106,7 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
         <br>
         <?= State::hydrate(State::getAvgValue('200d', $currencySymbol)); ?>
     </td>
-    <td class="visual-td" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= $thirtyDaysPlot; ?>]">
+    <td class="visual-td" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= $thirtyDaysPlot; ?>]" data-columns="[<?=$thirtyDaysColumnsPlot?>]">
         <div id="container-<?= $model['id'];?>" class="chart7d"></div>
     </td>
 </tr>
