@@ -41,8 +41,8 @@ class State extends \yii\db\ActiveRecord
         $times['1d']['from'] = (time()-1*24*60*60)*1000;
 
         for ($i = 2; $i <= 30; $i++){
-            $times[$i.'d']['to'] = (time() - ($i+1)*24*60*60)*1000;
-            $times[$i.'d']['from'] = (time()-($i)*24*60*60)*1000;
+            $times[$i.'d']['to'] = (time() - ($i)*24*60*60)*1000;
+            $times[$i.'d']['from'] = (time()-($i+1)*24*60*60)*1000;
         }
 
         $times['45d']['to'] = (time() - 14*24*60*60)*1000;
