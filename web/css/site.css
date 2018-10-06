@@ -196,9 +196,11 @@ td.visual-td>div{
 }
 .bg-3{
     background-color: rgba(76, 175, 80, 0.6);
+    color: white;
 }
 .bg-4{
     background-color: rgba(76, 175, 80, 0.7);
+    color: white;
 }
 .bg-5{
     background-color: rgba(244, 67, 54, 0.05);
@@ -211,9 +213,11 @@ td.visual-td>div{
 }
 .bg-8{
     background-color: rgba(244, 67, 54, 0.6);
+    color: white;
 }
 .bg-9{
     background-color: rgba(244, 67, 54, 0.7);
+    color: white;
 }
 
 .highcharts-background {
