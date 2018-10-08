@@ -186,7 +186,8 @@ class SiteController extends Controller
             foreach ($item as $k => $value){
                 if ($k == 'volume' || $k == 'timestamp'){
                     $volumeNumbers[$k] = $value*1;
-                } else {
+                }
+                if ($k != 'volume') {
                     $itemNumbers[$k] = $value*1;
                 }
             }
