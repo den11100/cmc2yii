@@ -180,7 +180,11 @@ class SiteController extends Controller
 
         $tickerList = [];
         foreach ($list as $key => $item) {
-            $tickerList[$key] = array_values($item);
+            $itemNumbers = [];
+            foreach ($item as $k => $value){
+                $itemNumbers[$k] = $value*1;
+            }
+            $tickerList[$key] = array_values($itemNumbers);
         }
 
         return $this->render('info-market', [
