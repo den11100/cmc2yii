@@ -300,6 +300,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
         "maskColor": "rgba(255,255,255,0.3)",
         "series": [{
             type: 'candlestick',
+            "zIndex": 6,
             name: name + ' Stock Price',
             data: data,
             dataGrouping: {
