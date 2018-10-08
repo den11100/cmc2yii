@@ -159,8 +159,33 @@ class SiteController extends Controller
 
     public function actionInfoMarket($symbol)
     {
+        /* находим id записей максимально близкие к now но не старше 30 дней*/
+        $array = State::find()
+            //->select('*')
+            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL 30 DAY)*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
+            ->andWhere(['interval' => '1d'])
+            ->andWhere(['market' => $symbol.'/USDT'])
+            ->orderBy('timestamp asc')
+            ->asArray()
+            ->all();
+        //VarDumper::dump($array,7,1);
+        $idRowTimestampLessToNow = ArrayHelper::getColumn($array,'id');
+        $List = State::find()
+            ->select('timestamp, avg(open) as avg_open, avg(high) as avg_high, avg(low) as avg_low,  avg(close) as avg_close')
+            ->where(['in', 'id', $idRowTimestampLessToNow])
+            ->asArray()
+            ->groupBy('timestamp')
+            ->all();
+
+        $tickerList = [];
+        foreach ($List as $key => $item) {
+            $tickerList[$key] = [implode(', ', $item)];
+        }
+        //VarDumper::dump($tickerList, 7, 1);die;
+
         return $this->render('info-market', [
             'symbol' => $symbol,
+            'tickerList' => $tickerList,
         ]);
     }
 

@@ -1,46 +1,37 @@
 /**
  * Created by dn on 08.10.18.
  */
-$(document).ready(function () {
 
-    window.openGraph = function(id, data)
-    {
-        var dataColumns = $(this).data('columns');
-        console.log(dataColumns);
-        chartOptions = {
-            title: '',
-            plotOptions: {
-                series: {
-                    showInLegend: false,
-                    label: {
-                        connectorAllowed: false
-                    },
-                },
-                line: {
-                    marker: {
-                        enabled: false
-                    },
-                    color: '#FF0000',
-                }
-            },
-            tooltip: {
-                formatter: function() {
-                    return '$'+ this.y;
-                }
-            },
-            series: [{
-                name: '',
-                type: 'spline',
-                data: data,
-            }, {
-                name: '',
-                type: 'column',
-                data: dataColumns,
-            }],
-        };
+window.openCandleGraph = function(id, data) {
+    // create the chart
+    chartOptions = {
 
-        // Create the chart
-        Highcharts.chart(id, chartOptions);
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'AAPL Stock Price'
+        },
+
+        series: [{
+            type: 'candlestick',
+            name: 'AAPL Stock Price',
+            data: data,
+            dataGrouping: {
+                units: [
+                    [
+                        'week', // unit name
+                        [1] // allowed multiples
+                    ], [
+                        'month',
+                        [1, 2, 3, 4, 6]
+                    ]
+                ]
+            }
+        }]
     };
+    // Create the chart
+    Highcharts.chart(id, chartOptions);
+};
 
-});

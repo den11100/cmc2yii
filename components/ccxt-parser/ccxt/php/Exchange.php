@@ -140,7 +140,7 @@ class Exchange {
 //        'lakebtc',
 //        'lbank', // error lbank fetchOHLCV requires a $since argument
 //        'liqui',
-        'livecoin', // good
+//        'livecoin', // good
 //        'luno', // error
 //        'lykke',
 //        'mercado',

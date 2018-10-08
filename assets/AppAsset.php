@@ -33,5 +33,6 @@ class AppAsset extends AssetBundle
         'js/application.js',
         'js/jquery.dragtable.js',
         'js/highcharts.js',
+        'js/site-info-market.js',
     ];
 }
