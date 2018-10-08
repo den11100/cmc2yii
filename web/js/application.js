@@ -943,6 +943,27 @@ window.openCandleGraph = function(id, data, name, volumes) {
             "data": volumes,
             "zIndex": 0,
             "id": "mainvolume"
+        }, {
+            type: 'candlestick',
+            name: name + ' Stock Price',
+            data: data,
+            dataGrouping: {
+                units: [
+                    [
+                        'week', // unit name
+                        [1] // allowed multiples
+                    ], [
+                        'month',
+                        [1, 2, 3, 4, 6]
+                    ]
+                ]
+            },
+        },{
+            "name": "Total volume",
+            "type": "column",
+            "data": volumes,
+            "zIndex": 0,
+            "id": "mainvolume"
         }],
         "isStock": true
     }
