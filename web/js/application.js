@@ -122,7 +122,7 @@ window.openCandleGraph = function(id, data, name) {
 
     console.log(data);
 
-    data = [
+    /*data = [
         [
             1476106200000,
             115.02,
@@ -3637,7 +3637,7 @@ window.openCandleGraph = function(id, data, name) {
             220.58,
             224.29
         ]
-    ];
+    ];*/
 
     console.log(data);
 
