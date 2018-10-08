@@ -930,20 +930,7 @@ window.openCandleGraph = function(id, data, name, volumes) {
                 "_id": "highcharts-dsxxqvm-50"
             }]
         },
-        "series": [{
-            "name": "Avg. BTCUSD",
-            "type": "area",
-            "data": data,
-            "zIndex": 2,
-            "_colorIndex": 0,
-            "_symbolIndex": 0
-        }, {
-            "name": "Total volume",
-            "type": "column",
-            "data": volumes,
-            "zIndex": 0,
-            "id": "mainvolume"
-        }, {
+        "series": [ {
             type: 'candlestick',
             name: name + ' Stock Price',
             data: data,
@@ -964,7 +951,15 @@ window.openCandleGraph = function(id, data, name, volumes) {
             "data": volumes,
             "zIndex": 0,
             "id": "mainvolume"
-        }],
+        },
+            {
+                "name": "Avg. BTCUSD",
+                "type": "area",
+                "data": data,
+                "zIndex": 2,
+                "_colorIndex": 0,
+                "_symbolIndex": 0
+            },],
         "isStock": true
     }
 
