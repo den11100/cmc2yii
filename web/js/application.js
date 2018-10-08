@@ -3642,6 +3642,12 @@ window.openCandleGraph = function(id, data, name) {
     console.log(data);
 
     var options = {
+        plotOptions: {
+            candlestick: {
+                color: 'green',
+                upColor: 'red'
+            }
+        },
         rangeSelector: {
             selected: 2,
             buttons: [{
