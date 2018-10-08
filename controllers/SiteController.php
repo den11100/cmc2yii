@@ -185,8 +185,10 @@ class SiteController extends Controller
             $volumeNumbers = [];
             foreach ($item as $k => $value){
                 if ($k == 'volume' || $k == 'timestamp'){
-                    if ($k == 'volume') $volumeNumbers[$k] += 2000;
                     $volumeNumbers[$k] = $value*1;
+                    if ($k == 'volume'){
+                        $volumeNumbers[$k] += 2000;
+                    }
                 }
                 if ($k != 'volume') {
                     $itemNumbers[$k] = $value*1;
