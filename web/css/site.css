@@ -178,10 +178,10 @@ td.visual-td>div{
 .main-table td{
     max-height: 60px;
 }
-.highcharts-color-0{
+/*.highcharts-color-0{
     fill: green !important;
     stroke: green !important;
-}
+}*/
 .container {
     width: 90%;
 }
