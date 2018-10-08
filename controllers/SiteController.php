@@ -157,6 +157,13 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionInfoMarket($symbol)
+    {
+        return $this->render('info-market', [
+            'symbol' => $symbol,
+        ]);
+    }
+
     public function actionInfoPair($symbol)
     {
         $symbol = strtoupper($symbol);

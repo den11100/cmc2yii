@@ -16,6 +16,8 @@ use yii\helpers\VarDumper;
  * @property string $exchange
  * @property int $timestamp
  * @property int $interval
+ * @property double $open
+ * @property double $close
  */
 class State extends \yii\db\ActiveRecord
 {
@@ -174,7 +176,7 @@ class State extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['high', 'low', 'volume'], 'number'],
+            [['high', 'low', 'volume', 'open', 'close'], 'number'],
             [['timestamp'], 'integer'],
             [['market', 'exchange', 'interval'], 'string', 'max' => 255],
         ];
@@ -194,6 +196,8 @@ class State extends \yii\db\ActiveRecord
             'exchange' => 'Exchange',
             'timestamp' => 'Timestamp',
             'interval' => 'Interval',
+            'open' => 'Open',
+            'close' => 'Close',
         ];
     }
 

@@ -82,8 +82,10 @@
                             array_push($pairs, array(
                                 'exchange'	=> $exchange->name,
                                 'market'	=> $market['symbol'],
+                                'open'		=> floatval($ticker[1]),
                                 'high'		=> floatval($ticker[2]),
                                 'low'		=> floatval($ticker[3]),
+                                'close'		=> floatval($ticker[4]),
                                 'volume'	=> floatval($ticker[5]),
                                 'timestamp'	=> $ticker[0],
                                 'interval'	=> $tm
