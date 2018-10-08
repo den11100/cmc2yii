@@ -47,8 +47,10 @@ $this->title = 'Volume 24 by exchange';
                                 <p><?= $item['exchange'] ?></p>
                             </div>
                             <div class="col-md-8">
-                                <p><strong>Price height:</strong> <?= $item['high'] ?> $<br>
-                                    <strong>Price low:</strong> <?= $item['low'] ?> $</p>
+                                <p>
+                                    <strong>Price high:</strong> <?= $item['high'] ?> $<br>
+                                    <strong>Price low:</strong> <?= $item['low'] ?> $
+                                </p>
                             </div>
                         </div>
                         <?php endforeach; ?>

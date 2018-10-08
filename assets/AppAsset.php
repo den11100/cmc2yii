@@ -32,7 +32,8 @@ class AppAsset extends AssetBundle
         'js/jquery-ui.min.js',
         'js/application.js',
         'js/jquery.dragtable.js',
-        'js/highcharts.js',
-        'js/site-info-market.js',
+        #'js/highcharts.js',
+        'js/highstock.js',
+        'js/exporting.js',
     ];
 }

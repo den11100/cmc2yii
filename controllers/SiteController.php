@@ -168,20 +168,20 @@ class SiteController extends Controller
             ->orderBy('timestamp asc')
             ->asArray()
             ->all();
-        //VarDumper::dump($array,7,1);
+
         $idRowTimestampLessToNow = ArrayHelper::getColumn($array,'id');
-        $List = State::find()
+        $list = State::find()
             ->select('timestamp, avg(open) as avg_open, avg(high) as avg_high, avg(low) as avg_low,  avg(close) as avg_close')
             ->where(['in', 'id', $idRowTimestampLessToNow])
             ->asArray()
             ->groupBy('timestamp')
             ->all();
 
+
         $tickerList = [];
-        foreach ($List as $key => $item) {
-            $tickerList[$key] = [implode(', ', $item)];
+        foreach ($list as $key => $item) {
+            $tickerList[$key] = array_values($item);
         }
-        //VarDumper::dump($tickerList, 7, 1);die;
 
         return $this->render('info-market', [
             'symbol' => $symbol,

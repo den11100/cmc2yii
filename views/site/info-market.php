@@ -1,14 +1,15 @@
 <?php
 
 /**
-*   @var $this yii\web\View
-*   @var array $tickerList
+ * @var $this yii\web\View
+ * @var array $tickerList
+ * @var $symbol string
 */
 
 use \yii\helpers\VarDumper;
 
 $this->title = 'Info '. $symbol;
-
+$this->registerJs("openCandleGraph('market-candle-container',". json_encode($tickerList) .", '$symbol');");
 ?>
 
 <div class="row">
@@ -18,9 +19,3 @@ $this->title = 'Info '. $symbol;
     </div>
 </div>
 
-
-<?php //$this->registerJsFile('@web/js/site-info-market.js',[
-        //'depens' => \app\assets\AppAsset::className(),
-//]);
-
-$this->registerJs("openCandleGraph('market-candle-container',". json_encode($tickerList) .");");
