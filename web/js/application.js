@@ -130,23 +130,6 @@ window.openCandleGraph = function(id, data, name, volumes) {
     console.log(volumes);
 
     var options = {
-        "colors": ["rgba(132, 184, 235, 0.7)", "rgba(46, 204, 113, 0.7)", "rgba(155, 89, 182, 0.7)", "rgba(231, 76, 60, 0.7)", "rgba(52, 73, 94, 0.7)", "rgba(241, 196, 15, 0.7)", "rgba(26, 188, 156, 0.7)", "rgba(243, 156, 18, 0.7)", "rgba(211, 84, 0, 0.7)"],
-        "symbols": ["circle", "diamond", "square", "triangle", "triangle-down"],
-        "lang": {
-            "loading": "Loading...",
-            "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            "weekdays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "decimalPoint": ".",
-            "numericSymbols": ["k", "M", "G", "T", "P", "E"],
-            "resetZoom": "Reset zoom",
-            "resetZoomTitle": "Reset zoom level 1:1",
-            "thousandsSep": " ",
-            "rangeSelectorZoom": "",
-            "rangeSelectorFrom": "From",
-            "rangeSelectorTo": "To"
-        },
-        "global": {"useUTC": false},
         "chart": {
             "borderRadius": 0,
             "defaultSeriesType": "line",
@@ -168,12 +151,6 @@ window.openCandleGraph = function(id, data, name, volumes) {
             "text": null,
             "align": "center",
             "margin": 15,
-            "widthAdjust": -44
-        },
-        "subtitle": {
-            "style": {"color": "#666666", "fill": "#666666", "width": "1046px"},
-            "text": "",
-            "align": "center",
             "widthAdjust": -44
         },
         "plotOptions": {
@@ -801,107 +778,6 @@ window.openCandleGraph = function(id, data, name, volumes) {
             }
         },
         "labels": {"style": {"position": "absolute", "color": "#333333"}},
-        "legend": {
-            "enabled": true,
-            "align": "center",
-            "layout": "horizontal",
-            "borderColor": "#999999",
-            "borderRadius": 0,
-            "navigation": {"activeColor": "#003399", "inactiveColor": "#cccccc"},
-            "itemStyle": {
-                "color": "#333333",
-                "fontSize": "12px",
-                "fontWeight": "bold",
-                "textOverflow": "ellipsis",
-                "cursor": "pointer"
-            },
-            "itemHoverStyle": {"color": "#000000"},
-            "itemHiddenStyle": {"color": "#cccccc"},
-            "shadow": false,
-            "itemCheckboxStyle": {"position": "absolute", "width": "13px", "height": "13px"},
-            "squareSymbol": true,
-            "symbolPadding": 5,
-            "verticalAlign": "bottom",
-            "x": 0,
-            "y": 0,
-            "title": {"style": {"fontWeight": "bold"}},
-            "padding": 0,
-            "itemMarginBottom": 0,
-            "itemMarginTop": 0
-        },
-        "loading": {
-            "labelStyle": {"fontWeight": "bold", "position": "relative", "top": "45%"},
-            "style": {
-                "position": "absolute",
-                "backgroundColor": "#ffffff",
-                "opacity": 0.5,
-                "textAlign": "center",
-                "zIndex": 10
-            }
-        },
-        "tooltip": {
-            "enabled": true,
-            "animation": true,
-            "borderRadius": 3,
-            "dateTimeLabelFormats": {
-                "millisecond": "%A, %b %e, %H:%M:%S.%L",
-                "second": "%A, %b %e, %H:%M:%S",
-                "minute": "%A, %b %e, %H:%M",
-                "hour": "%A, %b %e, %H:%M",
-                "day": "%A, %b %e, %Y",
-                "week": "Week from %A, %b %e, %Y",
-                "month": "%B %Y",
-                "year": "%Y"
-            },
-            "footerFormat": "",
-            "padding": 8,
-            "snap": 10,
-            "backgroundColor": "rgba(247,247,247,0.85)",
-            "borderWidth": 1,
-            "headerFormat": "<span style=\"font-size: 10px\">{point.key}</span><br/>",
-            "pointFormat": "<span style=\"color:{point.color}\">●</span> {series.name}: <b>{point.y}</b><br/>",
-            "shadow": true,
-            "style": {
-                "color": "#333333",
-                "cursor": "default",
-                "fontSize": "12px",
-                "pointerEvents": "none",
-                "whiteSpace": "nowrap"
-            },
-            "split": true,
-            "crosshairs": true,
-            "useHTML": true,
-            "userOptions": {"split": true, "crosshairs": true, "useHTML": true}
-        },
-        "credits": {
-            "enabled": false,
-            "href": "http://www.highcharts.com",
-            "position": {"align": "right", "x": -10, "verticalAlign": "bottom", "y": -5},
-            "style": {"cursor": "pointer", "color": "#999999", "fontSize": "9px"},
-            "text": "Highcharts.com"
-        },
-        "scrollbar": {
-            "height": 14,
-            "barBorderRadius": 0,
-            "buttonBorderRadius": 0,
-            "liveRedraw": false,
-            "margin": 10,
-            "minWidth": 6,
-            "step": 0.2,
-            "zIndex": 3,
-            "barBackgroundColor": "#cccccc",
-            "barBorderWidth": 1,
-            "barBorderColor": "#cccccc",
-            "buttonArrowColor": "#333333",
-            "buttonBackgroundColor": "#e6e6e6",
-            "buttonBorderColor": "#cccccc",
-            "buttonBorderWidth": 1,
-            "rifleColor": "#333333",
-            "trackBackgroundColor": "#f2f2f2",
-            "trackBorderColor": "#f2f2f2",
-            "trackBorderWidth": 1,
-            "enabled": false
-        },
         "rangeSelector": {
             selected: 2,
             buttons: [{
@@ -923,13 +799,6 @@ window.openCandleGraph = function(id, data, name, volumes) {
         "textColor": "#34495e",
         "contrastTextColor": "#F0F0F3",
         "maskColor": "rgba(255,255,255,0.3)",
-        "responsive": {
-            "rules": [{
-                "condition": {"maxWidth": 768},
-                "chartOptions": {"chart": {"spacing": [10, 0, 10, 0]}},
-                "_id": "highcharts-dsxxqvm-50"
-            }]
-        },
         "series": [ {
             type: 'candlestick',
             name: name + ' Stock Price',
