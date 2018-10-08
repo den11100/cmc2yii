@@ -180,15 +180,19 @@ class SiteController extends Controller
 
         $tickerList = [];
         $volumeList = [];
+        $lastValue = 0;
         foreach ($list as $key => $item) {
             $itemNumbers = [];
             $volumeNumbers = [];
             foreach ($item as $k => $value){
                 if ($k == 'volume' || $k == 'timestamp'){
+                    if ($k == 'volume' && $value <= 0) $value = $lastValue;
                     $volumeNumbers[$k] = $value*1;
                 }
                 if ($k != 'volume') {
                     $itemNumbers[$k] = $value*1;
+                } else {
+                    if ($value*1 > 0) $lastValue = $value*1;
                 }
             }
             $tickerList[$key] = array_values($itemNumbers);

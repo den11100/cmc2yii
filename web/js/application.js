@@ -4,7 +4,7 @@
 $(document).ready(function () {
     $('.main-table').dragtable();
 
-    $(".visual-td").on("click", function(){
+    $(".visual-td").on("click", function () {
         $(".popup, .popup-content").addClass("active");
         var id = $(this).data('id');
         var data = $(this).data('data');
@@ -27,8 +27,8 @@ $(document).ready(function () {
                 }
             },
             tooltip: {
-                formatter: function() {
-                    return '$'+ this.y;
+                formatter: function () {
+                    return '$' + this.y;
                 }
             },
             series: [{
@@ -46,18 +46,17 @@ $(document).ready(function () {
         Highcharts.chart(id, chartOptions);
     });
 
-    $(".close, .popup").on("click", function(){
+    $(".close, .popup").on("click", function () {
         $(".popup, .popup-content").removeClass("active");
     });
 
 });
 
-window.openGraph = function(id, data)
-{
+window.openGraph = function (id, data) {
     chartOptions = {
         title: '',
         chart: {
-            backgroundColor:'rgba(255, 255, 255, 0.0)',
+            backgroundColor: 'rgba(255, 255, 255, 0.0)',
         },
         plotOptions: {
             series: {
@@ -65,8 +64,8 @@ window.openGraph = function(id, data)
                 className: 'main-color',
                 negativeColor: true,
                 label: {
-                        connectorAllowed: false
-                    },
+                    connectorAllowed: false
+                },
             },
             area: {
                 marker: {
@@ -82,8 +81,8 @@ window.openGraph = function(id, data)
             }
         },
         tooltip: {
-            formatter: function() {
-                return '$'+ this.y;
+            formatter: function () {
+                return '$' + this.y;
             }
         },
         series: [{
@@ -96,17 +95,15 @@ window.openGraph = function(id, data)
             enabled: false,
         }],
         xAxis: [{
-            labels:
-                {
-                    enabled: false
-                },
+            labels: {
+                enabled: false
+            },
             visible: false,
         }],
         yAxis: [{
-            labels:
-                {
-                    enabled: false
-                },
+            labels: {
+                enabled: false
+            },
             visible: false,
             startOnTick: true,
         }],
@@ -117,8 +114,7 @@ window.openGraph = function(id, data)
 };
 
 
-
-window.openCandleGraph = function(id, data, name, volumes) {
+window.openCandleGraph = function (id, data, name, volumes) {
 
     console.log('id');
     console.log(id);
@@ -154,437 +150,101 @@ window.openCandleGraph = function(id, data, name, volumes) {
             "widthAdjust": -44
         },
         "plotOptions": {
-            "line": {
-                "lineWidth": 2,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": {
-                    "lineWidth": 0,
-                    "lineColor": "#ffffff",
-                    "radius": 2,
-                    "states": {
-                        "hover": {
-                            "animation": {"duration": 50},
-                            "enabled": true,
-                            "radiusPlus": 2,
-                            "lineWidthPlus": 1
-                        }, "select": {"fillColor": "#cccccc", "lineColor": "#000000", "lineWidth": 2}
-                    },
-                    "enabled": false
-                },
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": "center",
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": "bottom",
-                    "x": 0,
-                    "y": 0,
-                    "padding": 5
-                },
-                "cropThreshold": 300,
-                "pointRange": 0,
-                "softThreshold": true,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": {"size": 10, "opacity": 0.25}
-                    }, "select": {"marker": {}}
-                },
-                "stickyTracking": true,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "tooltip": {}
-            },
-            "area": {
-                "lineWidth": 1,
+            "column": {
+                "lineWidth": 4,
                 "allowPointSelect": false,
                 "showCheckbox": false,
                 "animation": false,
-                "events": {},
-                "marker": {
-                    "lineWidth": 0,
-                    "lineColor": "#ffffff",
-                    "radius": 2,
-                    "states": {
-                        "hover": {
-                            "animation": {"duration": 50},
-                            "enabled": true,
-                            "radiusPlus": 2,
-                            "lineWidthPlus": 1
-                        }, "select": {"fillColor": "#cccccc", "lineColor": "#000000", "lineWidth": 2}
-                    },
-                    "enabled": false
-                },
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": "center",
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": "bottom",
-                    "x": 0,
-                    "y": 0,
-                    "padding": 5
-                },
-                "cropThreshold": 300,
-                "pointRange": 0,
-                "softThreshold": false,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": {"size": 10, "opacity": 0.25}
-                    }, "select": {"marker": {}}
-                },
-                "stickyTracking": true,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "threshold": 0,
-                "fillOpacity": 0.3,
-                "tooltip": {}
-            },
-            "spline": {
-                "lineWidth": 2,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": {
-                    "lineWidth": 0,
-                    "lineColor": "#ffffff",
-                    "radius": 2,
-                    "states": {
-                        "hover": {
-                            "animation": {"duration": 50},
-                            "enabled": true,
-                            "radiusPlus": 2,
-                            "lineWidthPlus": 1
-                        }, "select": {"fillColor": "#cccccc", "lineColor": "#000000", "lineWidth": 2}
-                    },
-                    "enabled": false
-                },
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": "center",
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": "bottom",
-                    "x": 0,
-                    "y": 0,
-                    "padding": 5
-                },
-                "cropThreshold": 300,
-                "pointRange": 0,
-                "softThreshold": true,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": {"size": 10, "opacity": 0.25}
-                    }, "select": {"marker": {}}
-                },
-                "stickyTracking": true,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "tooltip": {}
-            },
-            "areaspline": {
-                "lineWidth": 2,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": {
-                    "lineWidth": 0,
-                    "lineColor": "#ffffff",
-                    "radius": 2,
-                    "states": {
-                        "hover": {
-                            "animation": {"duration": 50},
-                            "enabled": true,
-                            "radiusPlus": 2,
-                            "lineWidthPlus": 1
-                        }, "select": {"fillColor": "#cccccc", "lineColor": "#000000", "lineWidth": 2}
-                    },
-                    "enabled": false
-                },
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": "center",
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": "bottom",
-                    "x": 0,
-                    "y": 0,
-                    "padding": 5
-                },
-                "cropThreshold": 300,
-                "pointRange": 0,
-                "softThreshold": false,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": {"size": 10, "opacity": 0.25}
-                    }, "select": {"marker": {}}
-                },
-                "stickyTracking": true,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "threshold": 0,
-                "tooltip": {}
-            },
-
-            "bar": {
-                "lineWidth": 2,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
                 "marker": null,
-                "point": {"events": {}},
                 "dataLabels": {
-                    "align": null,
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
+                    "align": null, "style": {
+                        "fontSize": "11px", "fontWeight": "bold", "color": "contrast", "textOutline": "1px contrast"
                     },
-                    "verticalAlign": null,
-                    "x": 0,
-                    "y": null,
-                    "padding": 5
+                    "verticalAlign": null, "x": 0, "y": null, "padding": 5
                 },
                 "cropThreshold": 50,
                 "pointRange": null,
                 "softThreshold": false,
                 "states": {
                     "hover": {
-                        "animation": {"duration": 50},
+                        "animation": {
+                            "duration": 50
+                        },
                         "lineWidthPlus": 1,
                         "marker": {},
                         "halo": false,
                         "brightness": 0.1
-                    }, "select": {"marker": {}, "color": "#cccccc", "borderColor": "#000000"}
+                    },
+                    "select": {
+                        "marker": {},
+                        "color": "#cccccc", "borderColor": "#000000"
+                    }
                 },
                 "stickyTracking": false,
                 "turboThreshold": 1000,
                 "findNearestPointBy": "x",
                 "borderRadius": 0,
                 "crisp": true,
-                "groupPadding": 0.2,
-                "pointPadding": 0.1,
-                "minPointLength": 0,
-                "startFromThreshold": true,
-                "threshold": 0,
-                "borderColor": "#ffffff"
-            },
-            "scatter": {
-                "lineWidth": 0,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": {
-                    "lineWidth": 0,
-                    "lineColor": "#ffffff",
-                    "radius": 4,
-                    "states": {
-                        "hover": {
-                            "animation": {"duration": 50},
-                            "enabled": true,
-                            "radiusPlus": 2,
-                            "lineWidthPlus": 1
-                        }, "select": {"fillColor": "#cccccc", "lineColor": "#000000", "lineWidth": 2}
-                    },
-                    "enabled": true
-                },
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": "center",
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": "bottom",
-                    "x": 0,
-                    "y": 0,
-                    "padding": 5
-                },
-                "cropThreshold": 300,
-                "pointRange": 0,
-                "softThreshold": true,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": {"size": 10, "opacity": 0.25}
-                    }, "select": {"marker": {}}
-                },
-                "stickyTracking": true,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "xy"
-            },
-            "pie": {
-                "lineWidth": 2,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": null,
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": "center",
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": "bottom",
-                    "x": 0,
-                    "y": 0,
-                    "padding": 5,
-                    "distance": 30,
-                    "enabled": true
-                },
-                "cropThreshold": 300,
-                "pointRange": 0,
-                "softThreshold": true,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": {"size": 10, "opacity": 0.25},
-                        "brightness": 0.1,
-                        "shadow": false
-                    }, "select": {"marker": {}}
-                },
-                "stickyTracking": false,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "center": [null, null],
-                "clip": false,
-                "colorByPoint": true,
-                "ignoreHiddenPoint": true,
-                "legendType": "point",
-                "size": null,
-                "showInLegend": false,
-                "slicedOffset": 10,
-                "borderColor": "#ffffff",
-                "borderWidth": 1
-            },
-            "ohlc": {
-                "lineWidth": 1,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": null,
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": null,
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": null,
-                    "x": 0,
-                    "y": null,
-                    "padding": 5
-                },
-                "cropThreshold": 50,
-                "pointRange": null,
-                "softThreshold": false,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": false,
-                        "brightness": 0.1,
-                        "lineWidth": 3
-                    }, "select": {"marker": {}, "color": "#cccccc", "borderColor": "#000000"}
-                },
-                "stickyTracking": true,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "borderRadius": 0,
-                "crisp": true,
-                "groupPadding": 0.2,
+                "groupPadding": 0.1,
                 "pointPadding": 0.1,
                 "minPointLength": 0,
                 "startFromThreshold": true,
                 "tooltip": {},
-                "threshold": null,
-                "borderColor": "#ffffff",
+                "threshold": 0,
+                "borderColor": "rgba(132, 184, 235, 0.8)",
                 "shadow": false,
-                "borderWidth": 0
+                "borderWidth": 0,
+                "color": "rgba(132, 184, 235, 0.8)",
+                "stacking": "normal",
+                "showInLegend": false,
+                "dataGrouping": {
+                    "enabled": true, "groupPixelWidth": 3, "approximation": "sum"
+                }
             },
             "candlestick": {
                 "lineWidth": 1,
                 "allowPointSelect": false,
                 "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
+                "animation": {
+                    "duration": 1000
+                }
+                ,
+                "events": {}
+                ,
                 "marker": null,
-                "point": {"events": {}},
+                "point": {
+                    "events": {}
+                }
+                ,
                 "dataLabels": {
-                    "align": null,
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": null,
-                    "x": 0,
-                    "y": null,
-                    "padding": 5
-                },
+                    "align": null, "style": {
+                        "fontSize": "11px", "fontWeight": "bold", "color": "contrast", "textOutline": "1px contrast"
+                    }
+                    ,
+                    "verticalAlign": null, "x": 0, "y": null, "padding": 5
+                }
+                ,
                 "cropThreshold": 50,
                 "pointRange": null,
                 "softThreshold": false,
                 "states": {
                     "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": false,
-                        "brightness": 0.1,
-                        "lineWidth": 2
-                    }, "select": {"marker": {}, "color": "#cccccc", "borderColor": "#000000"}
-                },
+                        "animation": {
+                            "duration": 50
+                        }
+                        ,
+                        "lineWidthPlus": 1, "marker": {}
+                        ,
+                        "halo": false, "brightness": 0.1, "lineWidth": 2
+                    }
+                    ,
+                    "select": {
+                        "marker": {}
+                        ,
+                        "color": "#cccccc", "borderColor": "#000000"
+                    }
+                }
+                ,
                 "stickyTracking": true,
                 "turboThreshold": 1000,
                 "findNearestPointBy": "x",
@@ -594,7 +254,8 @@ window.openCandleGraph = function(id, data, name, volumes) {
                 "pointPadding": 0.1,
                 "minPointLength": 0,
                 "startFromThreshold": true,
-                "tooltip": {},
+                "tooltip": {}
+                ,
                 "threshold": null,
                 "borderColor": "#ffffff",
                 "lineColor": "green",
@@ -603,172 +264,10 @@ window.openCandleGraph = function(id, data, name, volumes) {
                 "borderWidth": 0,
                 "color": "red",
                 "upLineColor": "red",
-                "dataGrouping": {"enabled": true, "groupPixelWidth": 12, "approximation": "ohlc"}
+                "dataGrouping": {
+                    "enabled": true, "groupPixelWidth": 12, "approximation": "ohlc"
+                }
             },
-            "flags": {
-                "lineWidth": 1,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": null,
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": null,
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": null,
-                    "x": 0,
-                    "y": null,
-                    "padding": 5
-                },
-                "cropThreshold": 50,
-                "pointRange": 0,
-                "softThreshold": false,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": false,
-                        "brightness": 0.1,
-                        "lineColor": "#000000",
-                        "fillColor": "#ccd6eb"
-                    }, "select": {"marker": {}, "color": "#cccccc", "borderColor": "#000000"}
-                },
-                "stickyTracking": false,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "borderRadius": 0,
-                "crisp": true,
-                "groupPadding": 0.2,
-                "pointPadding": 0.1,
-                "minPointLength": 0,
-                "startFromThreshold": true,
-                "threshold": null,
-                "borderColor": "#ffffff",
-                "shape": "flag",
-                "stackDistance": 12,
-                "textAlign": "center",
-                "y": -30,
-                "fillColor": "#ffffff",
-                "style": {"fontSize": "11px", "fontWeight": "bold"}
-            },
-            "treemap": {
-                "lineWidth": 0,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": false,
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": "center",
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": "middle",
-                    "x": 0,
-                    "y": 0,
-                    "padding": 5,
-                    "enabled": true,
-                    "defer": false,
-                    "inside": true
-                },
-                "cropThreshold": 300,
-                "pointRange": 0,
-                "softThreshold": true,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": false,
-                        "borderColor": "#999999",
-                        "brightness": 0.1,
-                        "opacity": 0.75,
-                        "shadow": false
-                    }, "select": {"marker": {}}
-                },
-                "stickyTracking": true,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "xy",
-                "showInLegend": false,
-                "ignoreHiddenPoint": true,
-                "layoutAlgorithm": "sliceAndDice",
-                "layoutStartingDirection": "vertical",
-                "alternateStartingDirection": false,
-                "levelIsConstant": true,
-                "drillUpButton": {"position": {"align": "right", "x": -10, "y": 10}},
-                "borderColor": "#e6e6e6",
-                "borderWidth": 1,
-                "opacity": 0.15
-            },
-            "sankey": {
-                "lineWidth": 2,
-                "allowPointSelect": false,
-                "showCheckbox": false,
-                "animation": {"duration": 1000},
-                "events": {},
-                "marker": null,
-                "point": {"events": {}},
-                "dataLabels": {
-                    "align": null,
-                    "style": {
-                        "fontSize": "11px",
-                        "fontWeight": "bold",
-                        "color": "contrast",
-                        "textOutline": "1px contrast"
-                    },
-                    "verticalAlign": null,
-                    "x": 0,
-                    "y": null,
-                    "padding": 5,
-                    "enabled": true,
-                    "backgroundColor": "none",
-                    "crop": false,
-                    "inside": true
-                },
-                "cropThreshold": 50,
-                "pointRange": null,
-                "softThreshold": false,
-                "states": {
-                    "hover": {
-                        "animation": {"duration": 50},
-                        "lineWidthPlus": 1,
-                        "marker": {},
-                        "halo": false,
-                        "brightness": 0.1,
-                        "linkOpacity": 1
-                    }, "select": {"marker": {}, "color": "#cccccc", "borderColor": "#000000"}
-                },
-                "stickyTracking": false,
-                "turboThreshold": 1000,
-                "findNearestPointBy": "x",
-                "borderRadius": 0,
-                "crisp": true,
-                "groupPadding": 0.2,
-                "pointPadding": 0.1,
-                "minPointLength": 0,
-                "startFromThreshold": true,
-                "threshold": 0,
-                "borderColor": "#ffffff",
-                "colorByPoint": true,
-                "curveFactor": 0.33,
-                "linkOpacity": 0.5,
-                "nodeWidth": 20,
-                "nodePadding": 10,
-                "showInLegend": false
-            },
-            "arearange": {"marker": {"enabled": false, "radius": 2}, "tooltip": {}},
-            "areasplinerange": {"marker": {"enabled": false, "radius": 2}, "tooltip": {}},
             "columnrange": {"shadow": false, "borderWidth": 0, "tooltip": {}},
             "series": {
                 "animation": false,
@@ -799,7 +298,7 @@ window.openCandleGraph = function(id, data, name, volumes) {
         "textColor": "#34495e",
         "contrastTextColor": "#F0F0F3",
         "maskColor": "rgba(255,255,255,0.3)",
-        "series": [ {
+        "series": [{
             type: 'candlestick',
             name: name + ' Stock Price',
             data: data,
@@ -818,7 +317,7 @@ window.openCandleGraph = function(id, data, name, volumes) {
                     ]
                 ]
             },
-        },{
+        }, {
             "name": "Total volume",
             "type": "column",
             "data": volumes,
@@ -828,58 +327,5 @@ window.openCandleGraph = function(id, data, name, volumes) {
         "isStock": true
     }
 
-    /*var options = {
-        plotOptions: {
-            candlestick: {
-                color: 'green',
-                upColor: 'red'
-            }
-        },
-        rangeSelector: {
-            selected: 2,
-            buttons: [{
-                type: 'day',
-                count: 7,
-                text: '7d'
-            }, {
-                type: 'day',
-                count: 14,
-                text: '14d'
-            }, {
-                type: 'all',
-                text: 'All'
-            }]
-        },
-
-        title: {
-            text: name + ' Stock Price'
-        },
-
-        series: [{
-            type: 'candlestick',
-            name: name + ' Stock Price',
-            data: data,
-            dataGrouping: {
-                units: [
-                    [
-                        'week', // unit name
-                        [1] // allowed multiples
-                    ], [
-                        'month',
-                        [1, 2, 3, 4, 6]
-                    ]
-                ]
-            },
-        },{
-            "name": "Total volume",
-            "type": "column",
-            "data": volumes,
-            "zIndex": 0,
-            "id": "mainvolume"
-        }]
-    };*/
-
     Highcharts.stockChart(id, options);
 };
-
-
