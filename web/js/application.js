@@ -3642,9 +3642,28 @@ window.openCandleGraph = function(id, data, name) {
     console.log(data);
 
     var options = {
-
         rangeSelector: {
-            selected: 1
+            selected: 4,
+            buttons: [{
+                type: 'day',
+                count: 1,
+                text: '1d'
+            }, {
+                type: 'day',
+                count: 7,
+                text: '7d'
+            }, {
+                type: 'day',
+                count: 14,
+                text: '14d'
+            }, {
+                type: 'day',
+                count: 30,
+                text: '30d'
+            }, {
+                type: 'all',
+                text: 'All'
+            }]
         },
 
         title: {
