@@ -62,16 +62,23 @@ window.openGraph = function(id, data)
         plotOptions: {
             series: {
                 showInLegend: false,
-                type: 'spline',
+                className: 'main-color',
+                negativeColor: true,
                 label: {
-                    connectorAllowed: false
-                },
+                        connectorAllowed: false
+                    },
             },
-            line: {
+            area: {
                 marker: {
-                    enabled: false
-                },
-                color: '#FF0000',
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
             }
         },
         tooltip: {
@@ -80,6 +87,8 @@ window.openGraph = function(id, data)
             }
         },
         series: [{
+            threshold: data[6],
+            type: 'area',
             name: '',
             data: data,
         }],
@@ -105,4 +114,4 @@ window.openGraph = function(id, data)
 
     // Create the chart
     Highcharts.chart(id, chartOptions);
-}
+};

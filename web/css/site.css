@@ -303,3 +303,23 @@ td.visual-td>div{
     width: 16px;
     max-width: 16px;
 }
+
+/* site/index */
+.main-color .highcharts-area {
+    fill: rgba(0, 128, 0, 0.42);
+}
+.main-color .highcharts-graph {
+    stroke: green;
+}
+.main-color, .main-color .highcharts-point {
+    fill: green;
+}
+.highcharts-graph.highcharts-negative {
+    stroke: red;
+}
+.highcharts-area.highcharts-negative {
+    fill: rgba(231, 76, 60, 0.15);
+}
+.highcharts-point.highcharts-negative {
+    fill: red;
+}
