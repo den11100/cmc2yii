@@ -806,11 +806,15 @@ window.openCandleGraph = function(id, data, name, volumes) {
             dataGrouping: {
                 units: [
                     [
+                        'day', // unit name
+                        [1, 2, 3, 4, 5] // allowed multiples
+                    ],
+                    [
                         'week', // unit name
-                        [1] // allowed multiples
+                        [1, 2, 3, 4] // allowed multiples
                     ], [
                         'month',
-                        [1, 2, 3, 4, 6]
+                        [1]
                     ]
                 ]
             },
