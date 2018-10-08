@@ -4,12 +4,14 @@
  * @var $this yii\web\View
  * @var array $tickerList
  * @var $symbol string
+ * @var $volumeList array
 */
 
 use \yii\helpers\VarDumper;
 
 $this->title = 'Info '. $symbol;
-$this->registerJs("openCandleGraph('market-candle-container',". json_encode($tickerList) .", '$symbol');");
+
+$this->registerJs("openCandleGraph('market-candle-container',". json_encode($tickerList) .", '$symbol', ".json_encode($volumeList)." );");
 ?>
 
 <div class="row">

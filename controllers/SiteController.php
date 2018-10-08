@@ -171,7 +171,7 @@ class SiteController extends Controller
 
         $idRowTimestampLessToNow = ArrayHelper::getColumn($array,'id');
         $list = State::find()
-            ->select('timestamp, avg(open) as avg_open, avg(high) as avg_high, avg(low) as avg_low,  avg(close) as avg_close')
+            ->select('timestamp, avg(open) as avg_open, avg(high) as avg_high, avg(low) as avg_low,  avg(close) as avg_close, volume')
             ->where(['in', 'id', $idRowTimestampLessToNow])
             ->asArray()
             ->groupBy('timestamp')
@@ -179,17 +179,25 @@ class SiteController extends Controller
 
 
         $tickerList = [];
+        $volumeList = [];
         foreach ($list as $key => $item) {
             $itemNumbers = [];
+            $volumeNumbers = [];
             foreach ($item as $k => $value){
-                $itemNumbers[$k] = $value*1;
+                if ($k == 'volume' || $k == 'timestamp'){
+                    $volumeNumbers[$k] = $value*1;
+                } else {
+                    $itemNumbers[$k] = $value*1;
+                }
             }
             $tickerList[$key] = array_values($itemNumbers);
+            $volumeList[$key] = array_values($volumeNumbers);
         }
 
         return $this->render('info-market', [
             'symbol' => $symbol,
             'tickerList' => $tickerList,
+            'volumeList' => $volumeList,
         ]);
     }
 

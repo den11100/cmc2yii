@@ -179,7 +179,7 @@ td.visual-td>div{
     max-height: 60px;
 }
 .highcharts-color-0{
-    fill: green;
+    fill: green !important;
     stroke: green !important;
 }
 .container {
