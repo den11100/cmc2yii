@@ -115,16 +115,6 @@ window.openGraph = function (id, data) {
 
 
 window.openCandleGraph = function (id, data, name, volumes) {
-
-    console.log('id');
-    console.log(id);
-    console.log('data');
-    console.log(data);
-    console.log('name');
-    console.log(name);
-    console.log('volumes');
-    console.log(volumes);
-
     var options = {
         "chart": {
             "borderRadius": 0,
@@ -214,16 +204,14 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 "marker": null,
                 "point": {
                     "events": {}
-                }
-                ,
+                },
                 "dataLabels": {
                     "align": null, "style": {
                         "fontSize": "11px", "fontWeight": "bold", "color": "contrast", "textOutline": "1px contrast"
                     }
                     ,
                     "verticalAlign": null, "x": 0, "y": null, "padding": 5
-                }
-                ,
+                },
                 "cropThreshold": 50,
                 "pointRange": null,
                 "softThreshold": false,
@@ -231,20 +219,16 @@ window.openCandleGraph = function (id, data, name, volumes) {
                     "hover": {
                         "animation": {
                             "duration": 50
-                        }
-                        ,
-                        "lineWidthPlus": 1, "marker": {}
-                        ,
+                        },
+                        "lineWidthPlus": 1, "marker": {},
                         "halo": false, "brightness": 0.1, "lineWidth": 2
-                    }
-                    ,
+                    },
                     "select": {
-                        "marker": {}
-                        ,
-                        "color": "#cccccc", "borderColor": "#000000"
+                        "marker": {},
+                        "color": "#cccccc",
+                        "borderColor": "#000000"
                     }
-                }
-                ,
+                },
                 "stickyTracking": true,
                 "turboThreshold": 1000,
                 "findNearestPointBy": "x",
@@ -254,8 +238,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 "pointPadding": 0.1,
                 "minPointLength": 0,
                 "startFromThreshold": true,
-                "tooltip": {}
-                ,
+                "tooltip": {},
                 "threshold": null,
                 "borderColor": "#ffffff",
                 "lineColor": "green",
@@ -279,7 +262,18 @@ window.openCandleGraph = function (id, data, name, volumes) {
         "labels": {"style": {"position": "absolute", "color": "#333333"}},
         "rangeSelector": {
             selected: 2,
-            buttons: [{
+            buttons: [
+            {
+                type: 'h',
+                count: 1,
+                text: '1h'
+            },
+            {
+                type: 'h',
+                count: 4,
+                text: '4h'
+            },
+            {
                 type: 'day',
                 count: 7,
                 text: '7d'
