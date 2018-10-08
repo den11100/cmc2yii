@@ -162,7 +162,7 @@ class SiteController extends Controller
         /* находим id записей максимально близкие к now но не старше 30 дней*/
         $array = State::find()
             //->select('*')
-            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL 30 DAY)*1000 AND UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)*1000'))
+            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL 30 DAY)*1000 AND UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)*1000'))
             ->andWhere(['interval' => '1d'])
             ->andWhere(['market' => $symbol.'/USDT'])
             ->orderBy('timestamp asc')
