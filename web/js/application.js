@@ -951,15 +951,7 @@ window.openCandleGraph = function(id, data, name, volumes) {
             "data": volumes,
             "zIndex": 0,
             "id": "mainvolume"
-        },
-            {
-                "name": "Avg. BTCUSD",
-                "type": "area",
-                "data": data,
-                "zIndex": 2,
-                "_colorIndex": 0,
-                "_symbolIndex": 0
-            },],
+        }],
         "isStock": true
     }
 
