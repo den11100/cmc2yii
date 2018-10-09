@@ -41,23 +41,23 @@ class MarketHelp extends Model
                 break;
             case "7d":
                 $t = "1h";
-                $period = "14 DAY";
+                $period = "7 DAY";
                 break;
             case "14d":
                 $t = "1h";
-                $period = "30 DAY";
+                $period = "14 DAY";
                 break;
             case "30d":
                 $t = "1d";
-                $period = "200 DAY";
+                $period = "30 DAY";
                 break;
             case "45d":
                 $t = "1d";
-                $period = "200 DAY";
+                $period = "45 DAY";
                 break;
             case "90d":
                 $t = "1d";
-                $period = "200 DAY";
+                $period = "90 DAY";
                 break;
             case "200d":
                 $t = "1d";
@@ -70,7 +70,7 @@ class MarketHelp extends Model
         }
 
         if ($exchange == 'all') {
-            /* находим id записей максимально близкие к now */
+            /* находим id записей максимально близкие к now - данные по всмем биржам*/
             $array = State::find()
                 ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.')*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
                 ->andWhere(['interval' => $t])
@@ -79,7 +79,7 @@ class MarketHelp extends Model
                 ->asArray()
                 ->all();
         } else {
-            /* находим id записей максимально близкие к now */
+            /* находим id записей максимально близкие к now и фильтруем по бирже*/
             $array = State::find()
                 ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.')*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
                 ->andWhere(['interval' => $t])

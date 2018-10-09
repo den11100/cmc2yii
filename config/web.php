@@ -68,8 +68,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'site/info-pair/<symbol:\w{1,6}>' => 'site/info-pair',
                 'site/info-market/<symbol:\w{1,6}>' => 'site/info-market',
+                'site/info-market/<symbol:\w{1,6}><period:\w{1,8}>' => 'site/info-market',
                 '<controller>/<action>' => '<controller>/<action>',
                 '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
             ],

@@ -15,7 +15,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
 ?>
 
 <div class="row">
-    <h2><?= $symbol;?>-USD OHLV</h2>
+    <h2><?= $symbol;?>-USDT OHLV</h2>
     <div class="col-md-12">
         <div id="market-candle-container" data-symbol="<?= $symbol;?>"></div>
     </div>
@@ -71,7 +71,9 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
     </div>
 </div>
 
-<?php   $this->registerJs("            
+<?php
+// JS для построения пирогов
+$this->registerJs("            
             Highcharts.chart('volume-per-exchange', {
             chart: {
                 plotBackgroundColor: null,
@@ -151,7 +153,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
             data: {"tm":tm, "symbol":symbol, "exchange":"all"},
             success: function(res){ 
                 console.log(res)
-                if (res == "none") {
+                if (res == "none") { //TODO не работает if
                     console.log("none-none");
                 } else {
                     var obj = JSON.parse(res);                    
@@ -164,5 +166,6 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
         });    
  });
 JS;
-
+//TODO ajax запросы работают не совсем корректно - График не сдвигается на выбранный период допустим 30 дней из 200 а обрезает до 30 дней
+//Диапазон можно задавать в models/MarketHelp.php 29 строка
 $this->registerJs($js);

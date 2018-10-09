@@ -158,14 +158,25 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionInfoMarket($symbol)
+    public function actionInfoMarket($symbol, $period)
     {
+        if($period == "24h") {
+            $period = "3 DAY";
+            $interval = '5m'; //TODO поменять на 15m Когда будем парсить нормальные данные
+        } else if ($period == "7d"){
+            $period = "7 DAY";
+            $interval = '1d'; //TODO поменять на 1h Когда будем парсить нормальные данные
+        }else {
+            $interval = '1d';
+        }
+
         $symbol = strtoupper($symbol);
+        $period = strtoupper($period);
         /* находим id записей максимально близкие к now но не старше 30 дней*/
         $array = State::find()
             //->select('*')
-            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL 200 DAY)*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
-            ->andWhere(['interval' => '1d'])
+            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.')*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
+            ->andWhere(['interval' => $interval])
             ->andWhere(['market' => $symbol.'/USDT'])
             ->orderBy('timestamp asc')
             ->asArray()
