@@ -15,19 +15,20 @@ use yii\helpers\ArrayHelper;
 class Help extends Model
 {
     /**
-     * @param $models
-     * @return mixed
+     * @param $string
+     * @return string
      */
-    public static function getPercent($models)
+    public static function cleanData($string)
     {
-        if($models != []) {
-            $sum = array_sum(ArrayHelper::getColumn($models, 'volume'));
-            foreach ($models as $key => $model) {
-                //$models[$key]['volume'] = round($model['volume'], 4);
-                $models[$key]['percent'] = round($model['volume'] / $sum, 4);
-            }
-        }
+        $string = str_replace("'", "", $string);
+        $string = str_replace("\"", "", $string);
+        $string = strip_tags($string);
+        $string = htmlspecialchars($string);
+        $string = addslashes($string);
 
-        return $models;
+        $quotes = array ("\x27", "\x22", "\x60", "\t", "\n", "\r", "*", "%", "<", ">", "?", "!" , "«", "»", ";");
+        $string = str_replace( $quotes, '', $string );
+
+        return $string;
     }
 }
