@@ -31,4 +31,18 @@ class Help extends Model
 
         return $string;
     }
+
+    public static function saveDb($marketCapArray)
+    {
+        $newArray = [];
+        foreach ($marketCapArray as $item){
+            foreach ($item['data'] as $i) {
+                $newArray[] = $i;
+            }
+        }
+        //var_dump($newArray);die;
+
+        $array = ArrayHelper::map($newArray, 'symbol', 'quotes');
+        var_dump($array);die;
+    }
 }

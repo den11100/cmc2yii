@@ -7,8 +7,11 @@
 
 namespace app\commands;
 
+use app\models\Help;
 use yii\console\Controller;
 use yii\console\ExitCode;
+use yii\httpclient\Client;
+
 
 /**
  * This command echoes the first argument that you have entered.
@@ -44,5 +47,26 @@ class HelloController extends Controller
         $parser = new \Parser();
 
         $parser::update_tm($interval);
+    }
+
+    public function actionMarketCap()
+    {
+        //https://api.coinmarketcap.com/v2/ticker/?start=101&limit=100&sort=id
+        $url = "https://api.coinmarketcap.com/v2/ticker/";
+        $start = ['1','101', '201', '301' ,'401', '501'];
+        $marketCapArray = [];
+        for ($i=0; $i <= 5; $i++) {
+            $url = $url . "?start=$start[$i]&limit=100&sort=id";
+            $client = new Client();
+            $response = $client->createRequest()
+                ->setMethod('get')
+                ->setUrl($url)
+                ->send();
+            $marketCapArray[$i] = json_decode($response->content, true);
+            sleep(1);
+        }
+
+        Help::saveDb($marketCapArray);
+        //file_put_contents("/var/www/crypto/web/market-cap.txt", json_encode($marketCapArray));
     }
 }
