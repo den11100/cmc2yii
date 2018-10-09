@@ -28,7 +28,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
 
 <div class="row">
     <div class="col-md-6">
-        <h2>Volume <?= $symbol ?>/USD 24 by exchange </h2>
+        <h2 class="text-center">Volume <?= $symbol ?>/USD 24 by exchange </h2>
         <div id="volume-per-exchange" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
         <?php foreach ($modelsGroupByExchange as $model): ?>
@@ -44,7 +44,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
         <?php endforeach; ?>
     </div>
     <div class="col-md-6">
-        <h2>Volume <?= $symbol ?> 24 by currency</h2>
+        <h2 class="text-center">Volume <?= $symbol ?> 24 by currency</h2>
         <div id="market" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
         <?php foreach ($markets as $key => $market): ?>
@@ -71,7 +71,6 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
     </div>
 </div>
 
-
 <?php   $this->registerJs("            
             Highcharts.chart('volume-per-exchange', {
             chart: {
@@ -81,7 +80,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
                 type: 'pie'
             },
             title: {
-                text: 'Volume per exchange for 24h'
+                text: false
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -114,7 +113,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
                 type: 'pie'
             },
             title: {
-                text: 'Market for 24h'
+                text: false
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -142,9 +141,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
 
 ?>
 
-<?php
-
-$js = <<<JS
+<?php $js = <<<JS
  $('.highcharts-range-selector-buttons .highcharts-button').on('click', function(){
      var tm = $(this).find('text').text();
      var symbol = $('#market-candle-container').attr('data-symbol');

@@ -272,8 +272,11 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 type: 'h',
                 count: 4,
                 text: '4h'
-            },
-            {
+            }, {
+                type: 'h',
+                count: 24,
+                text: '24h'
+            }, {
                 type: 'day',
                 count: 7,
                 text: '7d'
@@ -281,6 +284,18 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 type: 'day',
                 count: 14,
                 text: '14d'
+            }, {
+                type: 'day',
+                count: 30,
+                text: '30d'
+            }, {
+                type: 'day',
+                count: 45,
+                text: '45d'
+            }, {
+                type: 'day',
+                count: 90,
+                text: '90d'
             }, {
                 type: 'all',
                 text: 'All'
