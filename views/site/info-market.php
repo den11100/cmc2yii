@@ -142,24 +142,26 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
 ?>
 
 <?php $js = <<<JS
- $('.highcharts-range-selector-buttons .highcharts-button').on('click', function(){
+ $('body').on('click', '.highcharts-range-selector-buttons .highcharts-button', function(){
      var tm = $(this).find('text').text();
      var symbol = $('#market-candle-container').attr('data-symbol');
      $.ajax({
             url: '/site/ajax-market-time-frame',
             type: 'POST',
             data: {"tm":tm, "symbol":symbol, "exchange":"all"},
-            success: function(res){
-                var obj = JSON.parse(res);
-                console.log(obj.tickerList);
-                console.log(obj.volumeList);
+            success: function(res){ 
+                console.log(res)
+                if (res == "none") {
+                    console.log("none-none");
+                } else {
+                    var obj = JSON.parse(res);                    
+                    openCandleGraph('market-candle-container', obj.tickerList, symbol, obj.volumeList)                   
+                }
             },
             error: function(){
                 alert('Error!');
             }
-        });     
- 
-    return false;
+        });    
  });
 JS;
 

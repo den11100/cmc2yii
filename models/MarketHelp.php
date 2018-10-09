@@ -24,21 +24,49 @@ class MarketHelp extends Model
      */
     public static function getLists($tm, $symbol, $exchange)
     {
-        $t = "5m";
-        $period = "1 HOUR";
+        $t = "";
+        $period = "";
         switch ($tm) {
             case "1h":
                 $t = "5m";
-                $period = "1 HOUR";
+                $period = "24 HOUR";
                 break;
             case "4h":
                 $t = "5m";
-                $period = "4 HOUR";
+                $period = "48 HOUR";
                 break;
-            case "1d":
+            case "24h":
                 $t = "15m";
                 $period = "1 DAY";
                 break;
+            case "7d":
+                $t = "1h";
+                $period = "14 DAY";
+                break;
+            case "14d":
+                $t = "1h";
+                $period = "30 DAY";
+                break;
+            case "30d":
+                $t = "1d";
+                $period = "200 DAY";
+                break;
+            case "45d":
+                $t = "1d";
+                $period = "200 DAY";
+                break;
+            case "90d":
+                $t = "1d";
+                $period = "200 DAY";
+                break;
+            case "200d":
+                $t = "1d";
+                $period = "200 DAY";
+                break;
+        }
+
+        if($t == ''){
+            return 'none';
         }
 
         if ($exchange == 'all') {
@@ -87,7 +115,7 @@ class MarketHelp extends Model
             $volumeList[$key] = array_values($volumeNumbers);
         }
 
-        return ["tickerList" => json_encode($tickerList), "volumeList" => json_encode($volumeList)];
+        return ["tickerList" => $tickerList, "volumeList" => $volumeList];
     }
 
     /**

@@ -277,7 +277,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 count: 24,
                 text: '24h'
             }, {
-                type: 'day',
+                type: 'h',
                 count: 7,
                 text: '7d'
             }, {
@@ -297,9 +297,10 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 count: 90,
                 text: '90d'
             }, {
-                type: 'all',
-                text: 'All'
-            }]
+                    type: 'day',
+                    count: 200,
+                    text: '200d'
+            },]
         },
         "legendBackgroundColor": "rgba(0, 0, 0, 0.5)",
         "background2": "#505053",
