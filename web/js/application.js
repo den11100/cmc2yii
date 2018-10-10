@@ -85,6 +85,11 @@ window.openGraph = function (id, data) {
                 return '$' + this.y;
             }
         },
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
         series: [{
             threshold: data[6],
             type: 'area',
@@ -308,6 +313,11 @@ window.openCandleGraph = function (id, data, name, volumes) {
         "textColor": "#34495e",
         "contrastTextColor": "#F0F0F3",
         "maskColor": "rgba(255,255,255,0.3)",
+        "navigation": {
+            "buttonOptions": {
+                "enabled": false
+            }
+        },
         "series": [{
             type: 'candlestick',
             "zIndex": 6,
@@ -336,6 +346,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
             "id": "mainvolume"
         }],
         "isStock": true
+
     }
 
     Highcharts.stockChart(id, options);

@@ -155,8 +155,6 @@ td.digital-td{
     width: 60px;
 }
 td.visual-td{
-    width: 160px !important;
-    max-width: 160px;
     padding: 0px !important;
 }
 td.visual-td>div{
@@ -171,12 +169,23 @@ td.visual-td>div{
 .btc-td, .rnd-td{
     text-align: right;
 }
-.btc-td, .name-td{
+.btc-td{
+    width: 50px !important;
+    max-width: 50px;
+}
+.name-td{
     width: 80px !important;
     max-width: 80px;
 }
 .main-table td{
     max-height: 60px;
+}
+
+.table > thead > tr > th {
+    text-align: center;
+}
+.th-chart {
+    width: 172px;
 }
 /*.highcharts-color-0{
     fill: green !important;

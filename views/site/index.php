@@ -31,7 +31,7 @@ $this->title = 'CMC2';
                                 <th>45d</th>
                                 <th>90d</th>
                                 <th>200d</th>
-                                <th>7 days chart</th>
+                                <th class="th-chart">7 days chart</th>
                             </tr>                        
                         </thead>
                         <tbody>
