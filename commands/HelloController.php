@@ -51,22 +51,39 @@ class HelloController extends Controller
 
     public function actionMarketCap()
     {
-        //https://api.coinmarketcap.com/v2/ticker/?start=101&limit=100&sort=id
         $url = "https://api.coinmarketcap.com/v2/ticker/";
-        $start = ['1','101', '201', '301' ,'401', '501'];
         $marketCapArray = [];
-        for ($i=0; $i <= 5; $i++) {
-            $url = $url . "?start=$start[$i]&limit=100&sort=id";
-            $client = new Client();
-            $response = $client->createRequest()
-                ->setMethod('get')
-                ->setUrl($url)
-                ->send();
-            $marketCapArray[$i] = json_decode($response->content, true);
-            sleep(1);
-        }
+
+        $client = new Client();
+
+        $requests = [
+            'send1' => $client->get($url.'?start=1&limit=100&sort=id'),
+            'send2' => $client->get($url.'?start=101&limit=100&sort=id'),
+            'send3' => $client->get($url.'?start=201&limit=100&sort=id'),
+            'send4' => $client->get($url.'?start=301&limit=100&sort=id'),
+            'send5' => $client->get($url.'?start=401&limit=100&sort=id'),
+            'send6' => $client->get($url.'?start=501&limit=100&sort=id'),
+            'send7' => $client->get($url.'?start=601&limit=100&sort=id'),
+            'send8' => $client->get($url.'?start=701&limit=100&sort=id'),
+            'send9' => $client->get($url.'?start=801&limit=100&sort=id'),
+            'send10' => $client->get($url.'?start=901&limit=100&sort=id'),
+            'send11' => $client->get($url.'?start=1001&limit=100&sort=id'),
+        ];
+
+        $responses = $client->batchSend($requests);
+
+        $marketCapArray[1] = json_decode($responses['send1']->content, true);
+        $marketCapArray[2] = json_decode($responses['send2']->content, true);
+        $marketCapArray[3] = json_decode($responses['send3']->content, true);
+        $marketCapArray[4] = json_decode($responses['send4']->content, true);
+        $marketCapArray[5] = json_decode($responses['send5']->content, true);
+        $marketCapArray[6] = json_decode($responses['send6']->content, true);
+        $marketCapArray[7] = json_decode($responses['send7']->content, true);
+        $marketCapArray[8] = json_decode($responses['send8']->content, true);
+        $marketCapArray[9] = json_decode($responses['send9']->content, true);
+        $marketCapArray[10] = json_decode($responses['send10']->content, true);
+        $marketCapArray[11] = json_decode($responses['send11']->content, true);
 
         Help::saveDb($marketCapArray);
-        //file_put_contents("/var/www/crypto/web/market-cap.txt", json_encode($marketCapArray));
     }
 }

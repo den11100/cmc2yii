@@ -261,5 +261,4 @@ class SiteController extends Controller
             return json_encode($tickerListAndVolumeList);
         }
     }
-
 }

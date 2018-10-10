@@ -10,6 +10,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 class Help extends Model
@@ -40,9 +41,15 @@ class Help extends Model
                 $newArray[] = $i;
             }
         }
-        //var_dump($newArray);die;
 
-        $array = ArrayHelper::map($newArray, 'symbol', 'quotes');
-        var_dump($array);die;
+        $arrayDirty = ArrayHelper::map($newArray, 'symbol', 'quotes');
+
+        $result = [];
+        foreach ($arrayDirty as $key => $item) {
+            $result[] = [$key, $item['USD']['market_cap']];
+        }
+
+        Yii::$app->db->createCommand()->truncateTable('{{%market_cap}}')->execute();
+        Yii::$app->db->createCommand()->batchInsert('{{%market_cap}}', ['symbol', 'market_cap'], $result)->execute();
     }
 }
