@@ -6,6 +6,7 @@ use app\models\Cctx;
 use app\models\CctxSearch;
 use app\models\Help;
 use app\models\LeadersHelp;
+use app\models\MarketCap;
 use app\models\MarketHelp;
 use app\models\State;
 use app\models\StateTest;
@@ -145,7 +146,6 @@ class SiteController extends Controller
             }
         }
 
-
         $dataProvider = new ArrayDataProvider([
             'allModels' => $finalModels,
             'pagination' => [
@@ -153,8 +153,12 @@ class SiteController extends Controller
             ],
         ]);
 
+        $marketCap = MarketCap::find()->asArray()->all();
+        $marketCapFinal = ArrayHelper::map($marketCap, 'symbol', 'market_cap');
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'marketCapFinal' => $marketCapFinal,
         ]);
     }
 

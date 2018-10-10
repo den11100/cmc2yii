@@ -44,6 +44,11 @@ restart the mysql service
     */10 * * * * php /var/www/crypto/yii hello/index
     
     
+Каждые 1 час
+
+    5 */1 * * * php /var/www/crypto/yii hello/market-cap  
+    
+    
 Варианты параметра interval 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h,8h, 12h, 1d, 3d, 1w, 1M   
 hello/states interval
     
@@ -58,6 +63,9 @@ hello/states interval
 каждые 12 часов   
     
     0 */12 * * * php /var/www/crypto/yii hello/states 1d
+    
+   
+
     
    
 

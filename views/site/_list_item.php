@@ -3,11 +3,13 @@
 /**
  * @var $model []
  * @var $this \yii\web\View
+ * @var array $marketCapFinal
  */
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\State;
 use  \app\models\Cctx;
+use yii\helpers\ArrayHelper;
 
 $currencySymbol = str_replace(['/USDT', '/USDC', '/USD'], '', $model['symbol']);
 $currencies = \yii\helpers\Json::decode(Yii::$app->params['currencies']);
@@ -62,6 +64,9 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
     </td>
     <td class="digital-td">
         <?= '$ '.number_format($model['last'], 4); ?>
+    </td>
+    <td class="digital-td">
+        <?= ArrayHelper::getValue($marketCapFinal, $currencySymbol) ?>
     </td>
     <td class="digital-td btc-td">
         <?= number_format($model['last']/Cctx::$BTC_CURRENT, 4); ?>
