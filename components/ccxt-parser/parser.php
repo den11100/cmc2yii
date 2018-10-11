@@ -74,10 +74,11 @@
             $pairs = array();
             //try {
                 $exchange->load_markets();
-
+                //print_r($exchange);die;
                 foreach ($exchange->markets as $market){
                     if (strpos($market['symbol'], '/USD') !== false){
                         $tickers = $exchange->fetchOHLCV($market['symbol'], $tm);
+                        //print_r($tickers);die;
                         foreach ($tickers as $ticker) {
                             array_push($pairs, array(
                                 'exchange'	=> $exchange->name,
@@ -94,7 +95,7 @@
                     }
                 }
 
-
+            //print_r($pairs);die;
 //            } catch (Exception $exception) {
 ////				echo 'error'."\t".$exchange->name."\n";
 //            }

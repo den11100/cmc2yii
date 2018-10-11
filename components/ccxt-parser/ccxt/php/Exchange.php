@@ -54,12 +54,16 @@ class Exchange {
 //        'anxpro', // null
 //        'anybits',
 //        'bibox',
-//        'binance', // good очень большие показатели volume
+        'binance', // good очень большие показатели volume
 //        'bit2c', // null
 //        'bitbank',
 //        'bitbay', // null
 //        'bitfinex',
-//        'bitfinex2',
+
+//        'bitfinex2', //Exception 'ccxt\DDoSProtection' with message 'bitfinex2
+        // GET https://api.bitfinex.com/v2/candles/trade:1D:tSPKUSD/hist?sort=1&start=1539232954241 429 not accessible from this location at the moment'
+       // in /var/www/crypto/components/ccxt-parser/ccxt/php/Exchange.php:815
+
 //        'bitflyer', // null
 //        'bithumb', // null
 //        'bitkk', // null
@@ -89,7 +93,7 @@ class Exchange {
 //        'chbtc', // null
 //        'chilebit',
 //        'cobinhood',
-//        'coinbase', // null
+//        'coinbase', // null   // нет методов fetchTickers и fetchTrades
 //        'coinbasepro',
 //        'coincheck',
 //        'coinegg',
@@ -125,8 +129,8 @@ class Exchange {
 //        'getbtc',
 //        'hadax', // null
 //        'hitbtc', // error
-//        'hitbtc2',
-//        'huobi', // null
+        'hitbtc2', // good заработала !!!
+//        'huobi', // null  'fetchTrades' - нету ; 'fetchTickers' => false, запарывается на отборе монеты к USD if (strpos($market['symbol'], '/USD') !== false)   возвращает null
 //        'huobicny',
 //        'huobipro',
 //        'ice3x',
@@ -150,6 +154,14 @@ class Exchange {
 //        'okcoincny',
 //        'okcoinusd',
 //        'okex', //error
+                //dn@dn-comp:/var/www/crypto$ php yii hello/states 5m
+                //Exception 'ccxt\ExchangeError' with message 'okex {"result":false,"error_code":20006}'
+
+                //dn@dn-comp:/var/www/crypto$ php yii hello/states 5m
+                //Exception 'ccxt\RequestTimeout' with message
+                // 'okex GET https://www.okex.com/api/v1/future_kline.do?symbol=ltc_usd&type=5min&contract_type=this_week&since=1539151032832 28
+                // Operation timed out after 10002 milliseconds with 0 bytes received'
+
 //        'paymium',
         'poloniex', // good
 //        'qryptos',
