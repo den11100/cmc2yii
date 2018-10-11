@@ -142,30 +142,3 @@ $this->registerJs("
     ", yii\web\View::POS_READY);
 
 ?>
-
-<?php $js = <<<JS
- $('body').on('click', '.highcharts-range-selector-buttons .highcharts-button', function(){
-     var tm = $(this).find('text').text();
-     var symbol = $('#market-candle-container').attr('data-symbol');
-     $.ajax({
-            url: '/site/ajax-market-time-frame',
-            type: 'POST',
-            data: {"tm":tm, "symbol":symbol, "exchange":"all"},
-            success: function(res){ 
-                console.log(res)
-                if (res == "none") { //TODO не работает if
-                    console.log("none-none");
-                } else {
-                    var obj = JSON.parse(res);                    
-                    openCandleGraph('market-candle-container', obj.tickerList, symbol, obj.volumeList)                   
-                }
-            },
-            error: function(){
-                alert('Error!');
-            }
-        });    
- });
-JS;
-//TODO ajax запросы работают не совсем корректно - График не сдвигается на выбранный период допустим 30 дней из 200 а обрезает до 30 дней
-//Диапазон можно задавать в models/MarketHelp.php 29 строка
-$this->registerJs($js);

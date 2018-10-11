@@ -134,7 +134,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
             "plotBorderColor": "#cccccc",
             "panning": true,
             "pinchType": "none",
-            "zoomType": "x",
+            "zoomType": "xy",
             "events": {}
         },
         "title": {
@@ -202,10 +202,8 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 "showCheckbox": false,
                 "animation": {
                     "duration": 1000
-                }
-                ,
-                "events": {}
-                ,
+                },
+                "events": {},
                 "marker": null,
                 "point": {
                     "events": {}
@@ -213,8 +211,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 "dataLabels": {
                     "align": null, "style": {
                         "fontSize": "11px", "fontWeight": "bold", "color": "contrast", "textOutline": "1px contrast"
-                    }
-                    ,
+                    },
                     "verticalAlign": null, "x": 0, "y": null, "padding": 5
                 },
                 "cropThreshold": 50,
@@ -278,11 +275,11 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 count: 4,
                 text: '4h'
             }, {
-                type: 'h',
+                type: 'day',
                 count: 24,
                 text: '24h'
             }, {
-                type: 'h',
+                type: 'day',
                 count: 7,
                 text: '7d'
             }, {
@@ -302,9 +299,8 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 count: 90,
                 text: '90d'
             }, {
-                    type: 'day',
-                    count: 200,
-                    text: '200d'
+                type: 'all',
+                text: 'All'
             },]
         },
         "legendBackgroundColor": "rgba(0, 0, 0, 0.5)",
@@ -317,10 +313,9 @@ window.openCandleGraph = function (id, data, name, volumes) {
             "buttonOptions": {
                 "enabled": false
             }
-        },
-        "series": [{
+        }, "series": [{
             type: 'candlestick',
-            "zIndex": 6,
+            zIndex: 6,
             name: name + ' Stock Price',
             data: data,
             dataGrouping: {
@@ -339,15 +334,15 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 ]
             },
         }, {
-            "name": "Total volume",
-            "type": "column",
-            "data": volumes,
-            "zIndex": 0,
-            "id": "mainvolume"
+            name: "Total volume",
+            type: "column",
+            data: volumes,
+            zIndex: 0,
+            id: "mainvolume"
         }],
         "isStock": true
 
-    }
+    };
 
     Highcharts.stockChart(id, options);
 };

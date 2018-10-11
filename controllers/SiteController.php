@@ -198,7 +198,6 @@ class SiteController extends Controller
             $tickerList[$key] = array_values($itemNumbers);
             $volumeList[$key] = array_values($volumeNumbers);
         }
-
         /* --- make pies --- */
         /* Volume .../USD 24h by exchange */
         $modelsGroupByExchange = MarketHelp::getListForPieExchange($symbol);
@@ -239,19 +238,5 @@ class SiteController extends Controller
             'listLeadersGrow' => $listLeadersGrow,
             'listLeadersFall' => $listLeadersFall,
         ]);
-    }
-
-    public function actionAjaxMarketTimeFrame()
-    {
-        //$tickerList = MarketHelp::getTickerList('1h', "BTC", 'all');
-        if (Yii::$app->request->isAjax){
-            $tm = Help::cleanData(Yii::$app->request->post('tm'));
-            $symbol = Help::cleanData(Yii::$app->request->post('symbol'));
-            $exchange = Help::cleanData(Yii::$app->request->post('exchange'));
-
-            $tickerListAndVolumeList = MarketHelp::getLists($tm, $symbol, $exchange);
-
-            return json_encode($tickerListAndVolumeList);
-        }
     }
 }
