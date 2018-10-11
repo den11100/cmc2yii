@@ -164,12 +164,15 @@ class SiteController extends Controller
 
     public function actionInfoMarket($symbol, $period)
     {
-        if($period == "24h") {
-            $period = "3 DAY"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
-            $interval = '5m'; //TODO поменять на 15m Когда будем парсить нормальные данные
+        if($period == "1h") {
+            $period = "1 DAY"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
+            $interval = '5m';
+        }else if($period == "24h") {
+            $period = "1 DAY"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
+            $interval = '15m'; //TODO поменять на 15m Когда будем парсить нормальные данные
         } else if ($period == "7d"){
             $period = "7 DAY";// timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
-            $interval = '1d'; //TODO поменять на 1h Когда будем парсить нормальные данные
+            $interval = '1h'; //TODO поменять на 1h Когда будем парсить нормальные данные
         }else {
             $interval = '1d';
         }
