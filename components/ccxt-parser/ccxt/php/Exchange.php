@@ -163,7 +163,7 @@ class Exchange {
                 // Operation timed out after 10002 milliseconds with 0 bytes received'
 
 //        'paymium',
-        'poloniex', // good
+//        'poloniex', // good
 //        'qryptos',
 //        'quadrigacx',
 //        'quoinex',

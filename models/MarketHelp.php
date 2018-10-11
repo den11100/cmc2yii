@@ -28,12 +28,12 @@ class MarketHelp extends Model
         $period = "";
         switch ($tm) {
             case "1h":
-                $t = "5m";
-                $period = "24 HOUR";
+                $t = "1m";
+                $period = "1 HOUR";
                 break;
             case "4h":
-                $t = "5m";
-                $period = "48 HOUR";
+                $t = "1m";
+                $period = "4 HOUR";
                 break;
             case "24h":
                 $t = "15m";

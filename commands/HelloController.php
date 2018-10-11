@@ -8,8 +8,10 @@
 namespace app\commands;
 
 use app\models\Help;
+use app\models\State;
 use yii\console\Controller;
 use yii\console\ExitCode;
+use yii\db\Expression;
 use yii\httpclient\Client;
 
 
@@ -86,4 +88,21 @@ class HelloController extends Controller
 
         Help::saveDb($marketCapArray);
     }
+
+    public function actionDeleteOlder200()
+    {
+        $result = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 200 DAY))*1000'));
+        print_r($result);
+    }
+
+    public function actionCleanStates()
+    {
+        $result1 = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 HOUR))*1000 AND `interval` = "1m"'));
+        $result2 = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY))*1000 AND `interval` = "15m"'));
+        $result3 = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 DAY))*1000 AND `interval` = "1h"'));
+        print_r($result1);
+        print_r($result2);
+        print_r($result3);
+    }
+
 }

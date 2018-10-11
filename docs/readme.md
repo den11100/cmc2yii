@@ -35,26 +35,19 @@ restart the mysql service
 
 
 
-### cron
+### cron crontab -e
 
-    crontab -e
+    Чистим базу каждые 5 минут
+    */5 * * * * php /var/www/crypto/yii/hello/clean-states  
 
-Каждые 10
-
-    */10 * * * * php /var/www/crypto/yii hello/index
     
+каждые 10 минут
     
-Каждые 1 час
-
-    5 */1 * * * php /var/www/crypto/yii hello/market-cap  
+    */10 * * * * php /var/www/crypto/yii hello/states 1m
     
+каждые 15 минут
     
-Варианты параметра interval 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h,8h, 12h, 1d, 3d, 1w, 1M   
-hello/states interval
-    
-каждые 20 минут
-    
-    */20 * * * * php /var/www/crypto/yii hello/states 1m
+    */15 * * * * php /var/www/crypto/yii hello/states 15m
     
 каждые 30 минут    
         
@@ -62,10 +55,15 @@ hello/states interval
  
 каждые 12 часов   
     
-    0 */12 * * * php /var/www/crypto/yii hello/states 1d
+    5 */12 * * * php /var/www/crypto/yii hello/states 1d
+    Удаляем записи старше 200 дней каждые 1 час
+    8 */1* * * php /var/www/crypto/yii/hello/delete-older200 
     
    
+   
+market-cap  Каждые 1 час
 
+    2 */1 * * * php /var/www/crypto/yii hello/market-cap  
     
    
 

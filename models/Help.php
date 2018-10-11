@@ -8,6 +8,7 @@
 
 namespace app\models;
 
+use app\models\State;
 use Yii;
 use yii\base\Model;
 use yii\db\Expression;
@@ -48,7 +49,6 @@ class Help extends Model
         foreach ($arrayDirty as $key => $item) {
             $result[] = [$key, $item['USD']['market_cap']];
         }
-
         Yii::$app->db->createCommand()->truncateTable('{{%market_cap}}')->execute();
         Yii::$app->db->createCommand()->batchInsert('{{%market_cap}}', ['symbol', 'market_cap'], $result)->execute();
     }

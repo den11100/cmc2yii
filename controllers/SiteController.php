@@ -165,8 +165,8 @@ class SiteController extends Controller
     public function actionInfoMarket($symbol, $period)
     {
         if($period == "1h") {
-            $period = "1 DAY"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
-            $interval = '5m';
+            $period = "1 HOUR"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
+            $interval = '1m';
         }else if($period == "24h") {
             $period = "1 DAY"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
             $interval = '15m'; //TODO поменять на 15m Когда будем парсить нормальные данные
