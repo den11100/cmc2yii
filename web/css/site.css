@@ -332,3 +332,9 @@ td.visual-td>div{
 .highcharts-point.highcharts-negative {
     fill: red;
 }
+.highcharts-candlestick-series .highcharts-point-up {
+    fill: green !important;
+}
+.highcharts-candlestick-series .highcharts-point-down {
+    fill: red !important;
+}
