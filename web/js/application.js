@@ -144,6 +144,34 @@ window.openCandleGraph = function (id, data, name, volumes) {
             "margin": 15,
             "widthAdjust": -44
         },
+        "yAxis": [{ // Primary yAxis
+            labels: {
+                format: '{value} $',
+                style: {
+                    color: "#ffbd16"
+                }
+            },
+            title: {
+                text: 'Price',
+                style: {
+                    color: "#ffbd16"
+                }
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: 'Volume',
+                style: {
+                    color: "#ff14dc"
+                }
+            },
+            labels: {
+                format: '{value} $',
+                style: {
+                    color: "#ff14dc"
+                }
+            },
+            opposite: false
+        }],
         "plotOptions": {
             "column": {
                 "lineWidth": 4,
@@ -254,12 +282,12 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 }
             },
             "columnrange": {"shadow": false, "borderWidth": 0, "tooltip": {}},
-            "series": {
-                "animation": false,
-                "lineWidth": 1,
-                "dataGrouping": {"enabled": true, "groupPixelWidth": 3, "approximation": "close"},
-                "tooltip": {}
-            }
+            // "series": {
+            //     "animation": false,
+            //     "lineWidth": 1,
+            //     "dataGrouping": {"enabled": true, "groupPixelWidth": 3, "approximation": "close"},
+            //     "tooltip": {}
+            // }
         },
         "labels": {"style": {"position": "absolute", "color": "#333333"}},
         "rangeSelector": {
@@ -303,12 +331,12 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 text: 'All'
             },]
         },
-        "legendBackgroundColor": "rgba(0, 0, 0, 0.5)",
-        "background2": "#505053",
-        "dataLabelsColor": "#B0B0B3",
-        "textColor": "#34495e",
-        "contrastTextColor": "#F0F0F3",
-        "maskColor": "rgba(255,255,255,0.3)",
+        // "legendBackgroundColor": "rgba(0, 0, 0, 0.5)",
+        // "background2": "#505053",
+        // "dataLabelsColor": "#B0B0B3",
+        // "textColor": "#34495e",
+        // "contrastTextColor": "#F0F0F3",
+        // "maskColor": "rgba(255,255,255,0.3)",
         "navigation": {
             "buttonOptions": {
                 "enabled": false
@@ -337,6 +365,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
             name: "Total volume",
             type: "column",
             data: volumes,
+            yAxis: 1,
             zIndex: 0,
             id: "mainvolume"
         }],
