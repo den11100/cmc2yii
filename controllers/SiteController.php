@@ -162,27 +162,13 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionInfoMarket($symbol, $period)
+    public function actionInfoMarket($symbol)
     {
-        if($period == "1h") {
-            $period = "1 HOUR"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
-            $interval = '1m';
-        }else if($period == "24h") {
-            $period = "1 DAY"; // timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
-            $interval = '15m'; //TODO поменять на 15m Когда будем парсить нормальные данные
-        } else if ($period == "7d"){
-            $period = "7 DAY";// timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.
-            $interval = '1h'; //TODO поменять на 1h Когда будем парсить нормальные данные
-        }else {
-            $interval = '1d';
-        }
-
         $symbol = strtoupper($symbol);
-        $period = strtoupper($period);
         /* находим id записей максимально близкие к now но не старше X дней*/
         $array = State::find()
-            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$period.')*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
-            ->andWhere(['interval' => $interval])
+            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL 200 DAY)*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
+            ->andWhere(['interval' => "1d"])
             ->andWhere(['market' => $symbol.'/USDT'])
             ->orderBy('timestamp asc')
             ->asArray()

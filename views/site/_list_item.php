@@ -52,7 +52,7 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
         <?/*= $model['id']; */?>
     </td>-->
     <td class="digital-td name-td">
-        <a href="/site/info-market/<?= $currencySymbol . "?period=200%20DAY"; ?>">
+        <a href="/site/info-market/<?= $currencySymbol ?>">
             <?php if (file_exists(__DIR__ . '/../../web/icons/' . strtolower($currencySymbol) . '.png')) { ?>
                 <img src="/icons/<?= strtolower($currencySymbol); ?>.png" class="icon" alt="<?= $currencySymbol; ?>">
             <?php } ?>
@@ -77,53 +77,53 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
         <?= State::hydrate(State::getAvgValue('0d', $currencySymbol)); ?>
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('1d', $currencySymbol)); ?>">
-        <a href="<?= Url::to(["/site/info-market/".$currencySymbol ."?period=24h" ])?>">
+
         <?= State::hydratePercent($model['last'], State::getAvgValue('1d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('1d', $currencySymbol)); ?>
-        </a>
+
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('7d', $currencySymbol)); ?>">
-        <a href="<?= Url::to(["/site/info-market/".$currencySymbol ."?period=7d" ])?>">
+
         <?= State::hydratePercent($model['last'], State::getAvgValue('7d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('7d', $currencySymbol)); ?>
-        </a>
+
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('14d', $currencySymbol)); ?>">
-        <a href="<?= Url::to(["/site/info-market/".$currencySymbol ."?period=14%20DAY" ])?>">
+
         <?= State::hydratePercent($model['last'], State::getAvgValue('14d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('14d', $currencySymbol)); ?>
-        </a>
+
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('30d', $currencySymbol)); ?>">
-        <a href="<?= Url::to(["/site/info-market/".$currencySymbol ."?period=30%20DAY" ])?>">
+
         <?= State::hydratePercent($model['last'], State::getAvgValue('30d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('30d', $currencySymbol)); ?>
-        </a>
+
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('45d', $currencySymbol)); ?>">
-        <a href="<?= Url::to(["/site/info-market/".$currencySymbol ."?period=45%20DAY" ])?>">
+
         <?= State::hydratePercent($model['last'], State::getAvgValue('45d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('45d', $currencySymbol)); ?>
-        </a>
+
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('90d', $currencySymbol)); ?>">
-        <a href="<?= Url::to(["/site/info-market/".$currencySymbol ."?period=90%20DAY" ])?>">
+
         <?= State::hydratePercent($model['last'], State::getAvgValue('90d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('90d', $currencySymbol)); ?>
-        </a>
+
     </td>
     <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['last'], State::getAvgValue('200d', $currencySymbol)); ?>">
-        <a href="<?= Url::to(["/site/info-market/".$currencySymbol ."?period=200%20DAY" ])?>">
+
         <?= State::hydratePercent($model['last'], State::getAvgValue('200d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('200d', $currencySymbol)); ?>
-        </a>
+
     </td>
     <td class="visual-td" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= $thirtyDaysPlot; ?>]" data-columns="[<?=$thirtyDaysColumnsPlot?>]">
         <div id="container-<?= $model['id'];?>" class="chart7d"></div>

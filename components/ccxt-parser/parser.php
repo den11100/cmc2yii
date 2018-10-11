@@ -1,6 +1,8 @@
 <?php
 
-	ini_set('memory_limit', '256M');
+use app\models\State;
+
+ini_set('memory_limit', '256M');
 	date_default_timezone_set('Europe/Moscow');	
 	include 'ccxt/ccxt.php';
 
@@ -33,8 +35,10 @@
 			    $time = time();
 				$pairs = self::get_pairs_tm($exchange, $interval);
 				//print_r($pairs);
+
 				DB::insert_items('state', $pairs);
 			}
+            DB::cleanDuplicate();
 		}
 
 		public static function get_exchanges() {
@@ -156,6 +160,16 @@
                 $res = self::insert_item($table_name, $item);
 			}
 		}
+
+		public static function cleanDuplicate()
+        {
+            $result = Yii::$app->db->createCommand('
+DELETE FROM {{%state}} WHERE id NOT IN (SELECT id FROM(SELECT MAX(id) id FROM {{%state}} t 
+GROUP BY t.timestamp, t.exchange, t.market, t.`interval` HAVING COUNT(*) > 0 ) AS A);
+            ')->execute();
+            print_r($result);
+        }
+
 	}
 
 ?>
