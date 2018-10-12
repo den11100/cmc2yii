@@ -456,7 +456,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
         "labels": {"style": {"position": "absolute", "color": "#333333"}},
         "rangeSelector": {
             allButtonsEnabled: true,
-            selected: 4,
+            selected: 9,
             buttons: [
             {
                 type: 'minute',
