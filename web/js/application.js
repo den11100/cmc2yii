@@ -36,14 +36,42 @@ $(document).ready(function () {
                     enabled: false
                 }
             },
+            yAxis: [{
+                labels: {
+                    align: 'right',
+                    x: -3
+                },
+                title: {
+                    text: 'Price'
+                },
+                height: '60%',
+                lineWidth: 2,
+                resize: {
+                    enabled: true
+                }
+            }, {
+                labels: {
+                    align: 'right',
+                    x: -3
+                },
+                title: {
+                    text: 'Volume'
+                },
+                top: '65%',
+                height: '35%',
+                offset: 0,
+                lineWidth: 2
+            }],
+
             series: [{
-                name: '',
+                name: 'Price',
                 type: 'spline',
                 data: data,
             }, {
-                name: '',
+                name: 'Volume',
                 type: 'column',
                 data: dataColumns,
+                yAxis: 1,
             }],
         };
 

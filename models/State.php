@@ -42,7 +42,7 @@ class State extends \yii\db\ActiveRecord
         $times['1d']['to'] = (time() - 2*60*60)*1000;
         $times['1d']['from'] = (time()-1*24*60*60)*1000;
 
-        for ($i = 2; $i <= 30; $i++){
+        for ($i = 2; $i <= 200; $i++){
             $times[$i.'d']['to'] = (time() - ($i)*24*60*60)*1000;
             $times[$i.'d']['from'] = (time()-($i+1)*24*60*60)*1000;
         }
@@ -59,11 +59,12 @@ class State extends \yii\db\ActiveRecord
         foreach ($times as $time => $values){
             self::$states[$time] = State::find()
                 ->where(['LIKE', 'market', '/USD',])
+                ->andWhere(['interval' => "1d"])
                 ->andWhere(['between', 'timestamp', $values['from'], $values['to'], ])
                 ->groupBy('exchange, market')
                 ->all();
         }
-
+        //VarDumper::dump(self::$states[$time],7,1);die;
         $statesByTimeAndSymbols = [];
         foreach (self::$states as $time => $states){
             /** @var State $state */
@@ -201,5 +202,25 @@ class State extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getDataPrice($symbol, $days)
+    {
+        $result = [];
+        for($i = 0; $i <= $days; $i++)
+        {
+            $result[] = (float)State::getAvgValue($i.'d', $symbol);
+        }
+        return implode(',', $result);
+
+    }
+
+    public static function getDataVolume($symbol, $days)
+    {
+        $result = [];
+        for($i = 0; $i <= $days; $i++)
+        {
+            $result[] = (float)State::getVolume($i.'d', $symbol);
+        }
+        return implode(',', $result);
+    }
 
 }

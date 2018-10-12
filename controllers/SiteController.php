@@ -107,7 +107,7 @@ class SiteController extends Controller
     {
         State::prepareStates();
 
-        $finalModels = MarketCap::find()->orderBy('rank')->all();
+        $finalModels = MarketCap::find()->orderBy('rank')->asArray()->all();
 
         $bitcoin = MarketCap::find()->where(['symbol' => "BTC"])->asArray()->one();
         $bitcoinPrice = $bitcoin['price'];

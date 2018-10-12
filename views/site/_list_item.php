@@ -20,24 +20,7 @@ $sevenDaysPlot = implode(', ', [
     (float)State::getAvgValue('7d', $currencySymbol),
 ]);
 
-$thirtyDaysPlot = [];
-for($i = 0; $i <= 30; $i++)
-{
-    $thirtyDaysPlot[] = (float)State::getAvgValue($i.'d', $currencySymbol);
-}
-$thirtyDaysPlot = implode(',', $thirtyDaysPlot);
-
-
-$thirtyDaysColumnsPlot = [];
-for($i = 0; $i <= 30; $i++)
-{
-    $thirtyDaysColumnsPlot[] = (float)State::getVolume($i.'d', $currencySymbol);
-}
-$thirtyDaysColumnsPlot = implode(',', $thirtyDaysColumnsPlot);
-
-
 $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."]);");
-
 
 ?>
 <tr>
@@ -83,49 +66,37 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
         <?= State::hydrate(State::getAvgValue('1d', $currencySymbol)); ?>
 
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('7d', $currencySymbol)); ?>">
-
+    <td class="digital-td visual-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('7d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= State::getDataPrice($currencySymbol,7); ?>]" data-columns="[<?=State::getDataVolume($currencySymbol,7);?>]">
         <?= State::hydratePercent($model['price'], State::getAvgValue('7d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('7d', $currencySymbol)); ?>
-
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('14d', $currencySymbol)); ?>">
-
+    <td class="digital-td visual-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('14d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= State::getDataPrice($currencySymbol,14); ?>]" data-columns="[<?=State::getDataVolume($currencySymbol,14);?>]">
         <?= State::hydratePercent($model['price'], State::getAvgValue('14d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('14d', $currencySymbol)); ?>
-
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('30d', $currencySymbol)); ?>">
-
+    <td class="digital-td visual-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('30d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= State::getDataPrice($currencySymbol,30); ?>]" data-columns="[<?=State::getDataVolume($currencySymbol,30);?>]">
         <?= State::hydratePercent($model['price'], State::getAvgValue('30d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('30d', $currencySymbol)); ?>
-
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('45d', $currencySymbol)); ?>">
-
+    <td class="digital-td visual-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('45d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= State::getDataPrice($currencySymbol,45); ?>]" data-columns="[<?=State::getDataVolume($currencySymbol,45);?>]">
         <?= State::hydratePercent($model['price'], State::getAvgValue('45d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('45d', $currencySymbol)); ?>
-
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('90d', $currencySymbol)); ?>">
-
+    <td class="digital-td visual-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('90d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= State::getDataPrice($currencySymbol,90); ?>]" data-columns="[<?=State::getDataVolume($currencySymbol,90);?>]">
         <?= State::hydratePercent($model['price'], State::getAvgValue('90d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('90d', $currencySymbol)); ?>
-
     </td>
-    <td class="digital-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('200d', $currencySymbol)); ?>">
-
+    <td class="digital-td visual-td rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('200d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= State::getDataPrice($currencySymbol,200); ?>]" data-columns="[<?=State::getDataVolume($currencySymbol,200)?>]">
         <?= State::hydratePercent($model['price'], State::getAvgValue('200d', $currencySymbol)); ?>
         <br>
         <?= State::hydrate(State::getAvgValue('200d', $currencySymbol)); ?>
-
     </td>
-    <td class="visual-td" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= $thirtyDaysPlot; ?>]" data-columns="[<?=$thirtyDaysColumnsPlot?>]">
+    <td class="visual-td" data-target="modal-plot-container" data-id="plot-id" data-data="[<?= State::getDataPrice($currencySymbol,30) ?>]" data-columns="[<?=State::getDataVolume($currencySymbol,30);?>]">
         <div id="container-<?= $model['id'];?>" class="chart7d"></div>
     </td>
 </tr>

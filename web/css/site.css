@@ -342,3 +342,6 @@ td.visual-td>div{
 .highcharts-candlestick-series .highcharts-point-down {
     fill: red !important;
 }
+.visual-td:hover{
+    cursor:pointer;
+}
