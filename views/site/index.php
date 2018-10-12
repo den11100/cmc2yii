@@ -25,7 +25,6 @@ $this->title = 'CMC2';
                                 <th>Market Cap</th>
                                 <th>Circ.Supply</th>
                                 <th>BTC</th>
-                                <th>1h</th>
                                 <th>4h</th>
                                 <th>24h</th>
                                 <th>7d</th>
