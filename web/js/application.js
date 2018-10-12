@@ -134,6 +134,18 @@ $(document).ready(function () {
                         enabled: false
                     }
                 },
+                xAxis: {
+                    title: {
+                        enabled: true,
+                        text: 'Hours of the Day'
+                    },
+                    type: 'datetime',
+
+                    dateTimeLabelFormats : {
+                        hour: '%I %p',
+                        minute: '%I:%M %p'
+                    }
+                },
                 yAxis: [{
                     labels: {
                         align: 'right',
@@ -160,7 +172,6 @@ $(document).ready(function () {
                     offset: 0,
                     lineWidth: 2
                 }],
-
                 series: [{
                     name: 'Price',
                     type: 'spline',

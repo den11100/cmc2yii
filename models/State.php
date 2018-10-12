@@ -236,9 +236,9 @@ class State extends \yii\db\ActiveRecord
         $result = [];
         for($i = 0; $i <= $days; $i++)
         {
-            $result[] = (float)State::getAvgValue($i.'d', $symbol);
+            $result[] = [(time()-$i*24*60*60)*1000, (float)State::getAvgValue($i.'d', $symbol)];
         }
-        return implode(',', $result);
+        return $result;
 
     }
 
@@ -247,9 +247,9 @@ class State extends \yii\db\ActiveRecord
         $result = [];
         for($i = 0; $i <= $days; $i++)
         {
-            $result[] = (float)State::getVolume($i.'d', $symbol);
+            $result[] = [(time()-$i*24*60*60)*1000, (float)State::getVolume($i.'d', $symbol)];
         }
-        return implode(',', $result);
+        return $result;
     }
 
     public static function getPriceAndVolumeList($interval, $symbol, $chart)
@@ -275,8 +275,8 @@ class State extends \yii\db\ActiveRecord
         $volumeList = [];
         foreach ($list as $key => $item) {
             $avg_prise = ($item['avg_high'] + $item['avg_low'])/2;
-            array_push($priceList, $avg_prise);
-            array_push($volumeList, $item['avg_volume']*1);
+            array_push($priceList, [1*$item['timestamp'], $avg_prise, ]);
+            array_push($volumeList, [1*$item['timestamp'], $item['avg_volume']*1, ]);
         }
 
         return ["priceList" => $priceList, "volumeList" => $volumeList];
