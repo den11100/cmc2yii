@@ -33,23 +33,4 @@ class Help extends Model
 
         return $string;
     }
-
-    public static function saveDb($marketCapArray)
-    {
-        $newArray = [];
-        foreach ($marketCapArray as $item){
-            foreach ($item['data'] as $i) {
-                $newArray[] = $i;
-            }
-        }
-
-        $arrayDirty = ArrayHelper::map($newArray, 'symbol', 'quotes');
-
-        $result = [];
-        foreach ($arrayDirty as $key => $item) {
-            $result[] = [$key, $item['USD']['market_cap']];
-        }
-        Yii::$app->db->createCommand()->truncateTable('{{%market_cap}}')->execute();
-        Yii::$app->db->createCommand()->batchInsert('{{%market_cap}}', ['symbol', 'market_cap'], $result)->execute();
-    }
 }

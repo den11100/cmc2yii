@@ -7,11 +7,9 @@
 
 namespace app\commands;
 
-use app\models\Help;
-use app\models\State;
+use app\models\MarketCap;
 use yii\console\Controller;
 use yii\console\ExitCode;
-use yii\db\Expression;
 use yii\httpclient\Client;
 
 
@@ -25,23 +23,6 @@ use yii\httpclient\Client;
  */
 class HelloController extends Controller
 {
-    /**
-     * This command echoes what you have entered as the message.
-     * @param string $message the message to be echoed.
-     * @return int Exit code
-     */
-    public function actionIndex($message = 'hello world')
-    {
-        include __DIR__ . "/../components/ccxt-parser/parser.php";
-
-        $parser = new \Parser();
-        $parser::update();
-
-        echo $message . "\n";
-
-        return ExitCode::OK;
-    }
-
     public function actionStates($interval)
     {
         include __DIR__ . "/../components/ccxt-parser/parser.php";
@@ -86,6 +67,6 @@ class HelloController extends Controller
         $marketCapArray[10] = json_decode($responses['send10']->content, true);
         $marketCapArray[11] = json_decode($responses['send11']->content, true);
 
-        Help::saveDb($marketCapArray);
+        MarketCap::saveMarketCup($marketCapArray);
     }
 }

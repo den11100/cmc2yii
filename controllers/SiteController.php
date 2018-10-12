@@ -21,6 +21,7 @@ use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
+use yii\httpclient\Client;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -106,45 +107,10 @@ class SiteController extends Controller
     {
         State::prepareStates();
 
-        $result = Cctx::find()
-            ->select('id')
-            ->where(['LIKE', 'symbol', '/USD',])
-            ->andWhere(['NOT LIKE', 'symbol', 'FORTYTWO',])
-            ->andWhere(['>', 'last', 0])
-            ->groupBy('symbol')
-            ->orderBy('timestamp desc')
-            ->createCommand()
-            ->queryAll();
-        $idArr = [];
-        foreach ($result as $id){ $idArr[] = $id['id'];}
+        $finalModels = MarketCap::find()->orderBy('rank')->all();
 
-        $query = Cctx::find()->where(['in', 'id', $idArr])->orderBy('last desc');
-
-        $models = $query->all();
-
-        $newModels = [];
-        foreach ($models as $model){
-            $symbol = str_replace(['/USDT', '/USDC', '/USD'], '', $model->symbol);
-            $newModels[$symbol][] = $model;
-        }
-
-        $finalModels = [];
-        foreach ($newModels as $symbol => $models){
-            if (count($models) > 1){
-                $prices = 0;
-                foreach ($models as $model){
-                    $prices += $model->last;
-                    $lastModel = $model;
-                }
-                $price = $prices/count($models);
-                $lastModel->last = $price;
-                $finalModels[$symbol] = $lastModel;
-                if ($symbol == 'BTC') Cctx::$BTC_CURRENT = $lastModel->last;
-            } else {
-                $finalModels[$symbol] = $models[0];
-                if ($symbol == 'BTC') Cctx::$BTC_CURRENT = $models[0]->last;
-            }
-        }
+        $bitcoin = MarketCap::find()->where(['symbol' => "BTC"])->asArray()->one();
+        $bitcoinPrice = $bitcoin['price'];
 
         $dataProvider = new ArrayDataProvider([
             'allModels' => $finalModels,
@@ -153,12 +119,9 @@ class SiteController extends Controller
             ],
         ]);
 
-        $marketCap = MarketCap::find()->asArray()->all();
-        $marketCapFinal = ArrayHelper::map($marketCap, 'symbol', 'market_cap');
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'marketCapFinal' => $marketCapFinal,
+            'bitcoinPrice' => $bitcoinPrice,
         ]);
     }
 

@@ -3,7 +3,8 @@
 /**
  * @var $this yii\web\View
  * @var $dataProvider \yii\data\ArrayDataProvider
- * @var array $marketCapFinal
+ * @var $finalModels \app\models\MarketCap
+ * @var integer $bitcoinPrice
  */
 
 $this->title = 'CMC2';
@@ -22,6 +23,7 @@ $this->title = 'CMC2';
                                 <th>Symbol</th>
                                 <th>Price</th>
                                 <th>Market Cap</th>
+                                <th>Circ. Supply</th>
                                 <th>BTC</th>
                                 <th>1h</th>
                                 <th>24h</th>
@@ -40,7 +42,7 @@ $this->title = 'CMC2';
                         </table>
                         <div class="pager-div">{pager}</div>',
             'itemView' => '_list_item',
-            'viewParams' => ['marketCapFinal' => $marketCapFinal],
+            'viewParams' => ['bitcoinPrice' => $bitcoinPrice],
         ]); ?>
 
     </div>

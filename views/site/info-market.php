@@ -100,6 +100,11 @@ $this->registerJs("
                     }
                 }
             },
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
             series: [{
                 name: 'percent',
                 colorByPoint: true,
@@ -131,6 +136,11 @@ $this->registerJs("
                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
                     }
+                }
+            },
+            navigation: {
+                buttonOptions: {
+                    enabled: false
                 }
             },
             series: [{

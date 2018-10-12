@@ -31,6 +31,11 @@ $(document).ready(function () {
                     return '$' + this.y;
                 }
             },
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
             series: [{
                 name: '',
                 type: 'spline',

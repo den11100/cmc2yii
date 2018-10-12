@@ -17,16 +17,6 @@ ini_set('memory_limit', '256M');
 	);
 	
 	class Parser {
-		public static function update() {
-			$exchanges = self::get_exchanges();
-			$pairs = array();
-			foreach ($exchanges as $exchange) {
-				$time = time();
-				$pairs = self::get_pairs($exchange);
-				//print_r($pairs);
-				DB::insert_items('cctx', $pairs);
-			}
-		}
 
 		public static function update_tm($interval) {
 			$exchanges = self::get_exchanges();
@@ -55,24 +45,6 @@ ini_set('memory_limit', '256M');
 				}
 			}
 			return $exchanges;
-		}
-
-		public static function get_pairs($exchange) {
-			$pairs = array();
-			try {
-				$tickers = $exchange->fetch_tickers();
-				foreach ($tickers as $ticker) {
-					array_push($pairs, array(
-						'exchange'	=> $exchange->name,
-						'symbol'	=> $ticker['symbol'],
-						'last'		=> $ticker['last'],
-						'timestamp'	=> $ticker['timestamp']
-					));
-				}
-			} catch (Exception $exception) {
-				echo 'error'."\t".$exchange->name."\n";
-			}
-			return $pairs;
 		}
 
 		/** @var $exchange \ccxt\Exchange */
