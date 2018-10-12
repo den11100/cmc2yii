@@ -32,7 +32,7 @@ $this->title = 'Leaders';
                         <?php $currencyTwo = $currencies[1];?>
                         <tr>
                             <td style="width: 300px; min-width: 300px;">
-                                <a href="/site/info-pair/<?= $currencyOne;?>">
+                                <a href="/site/info-market/<?= $currencyOne;?>">
                                     <?=$currencyOne; ?>
                                 </a>/ <?=$currencyTwo; ?>
                             </td>
