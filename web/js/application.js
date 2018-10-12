@@ -9,7 +9,6 @@ $(document).ready(function () {
         var id = $(this).data('id');
         var data = $(this).data('data');
         var dataColumns = $(this).data('columns');
-        console.log(dataColumns);
         chartOptions = {
             title: '',
             plotOptions: {
@@ -60,14 +59,25 @@ $(document).ready(function () {
                 top: '65%',
                 height: '35%',
                 offset: 0,
-                lineWidth: 2
             }],
+            xAxis: {
+                title: {
+                    enabled: true,
+                    text: 'Time'
+                },
+                type: 'datetime',
 
+                dateTimeLabelFormats : {
+                    hour: '%I %p',
+                    minute: '%I:%M %p'
+                }
+            },
             series: [{
                 name: 'Price',
                 type: 'spline',
                 data: data,
             }, {
+                pointRange: 1000,
                 name: 'Volume',
                 type: 'column',
                 data: dataColumns,
