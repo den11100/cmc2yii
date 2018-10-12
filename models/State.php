@@ -38,8 +38,8 @@ class State extends \yii\db\ActiveRecord
     public static function prepareStatesDays()
     {
         $times = [];
-        $times['0d']['to'] = (time() - 60)*1000;
-        $times['0d']['from'] = (time()-2*60*60)*1000;
+        $times['0d']['to'] = (time() - 1*1*1*60)*1000;
+        $times['0d']['from'] = (time()-1*24*60*60)*1000;
 
         $times['1d']['to'] = (time() - 2*60*60)*1000;
         $times['1d']['from'] = (time()-1*24*60*60)*1000;
@@ -82,6 +82,33 @@ class State extends \yii\db\ActiveRecord
             foreach ($statesBySymbols as $symbol => $states){
                 self::$values[$time][$symbol] = array_sum($states['value']) / count($states['value']);
                 self::$volumes[$time][$symbol] = array_sum($states['volume']) / count($states['volume']);
+            }
+        }
+
+        self::prepareStatesMinutes();
+    }
+
+    public static function prepareStatesMinutes()
+    {
+        $states = State::find()
+            ->where(['interval' => '1m'])
+            ->andWhere(['between', 'timestamp', (time()-4*60*60)*1000, (time())*1000, ])
+            ->groupBy('exchange, market')
+            ->all();
+
+        $statesByTime = [];
+        /** @var State $state */
+        foreach ($states as $state){
+            if ($state->timestamp > (time()-4*60*60)*1000 && $state->timestamp < (time() - 1.5*60*60)*1000 ){
+                $statesByTime['4h'][$state->getSymbol()]['value'][] = $state->getMiddleValue();
+            } else {
+                $statesByTime['1h'][$state->getSymbol()]['value'][] = $state->getMiddleValue();
+            }
+        }
+
+        foreach ($statesByTime as $time => $statesBySymbols){
+            foreach ($statesBySymbols as $symbol => $states){
+                self::$values[$time][$symbol] = array_sum($states['value']) / count($states['value']);
             }
         }
     }

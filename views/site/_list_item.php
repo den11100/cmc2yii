@@ -54,10 +54,15 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
     <td class="digital-td btc-td">
         <?= number_format($model['price']/$bitcoinPrice, 5); ?>
     </td>
-    <td class="digital-td visual-td-ajax rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('0d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-interval="1m" data-symbol="<?=$currencySymbol?>" data-chart="1 HOUR">
-        <?= State::hydratePercent($model['price'], State::getAvgValue('0d', $currencySymbol)); ?>
+    <td class="digital-td visual-td-ajax rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('1h', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-interval="1m" data-symbol="<?=$currencySymbol?>" data-chart="1 HOUR">
+        <?= State::hydratePercent($model['price'], State::getAvgValue('1h', $currencySymbol)); ?>
         <br>
-        <?= State::hydrate(State::getAvgValue('0d', $currencySymbol)); ?>
+        <?= State::hydrate(State::getAvgValue('1h', $currencySymbol)); ?>
+    </td>
+    <td class="digital-td visual-td-ajax rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('4h', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-interval="1m" data-symbol="<?=$currencySymbol?>" data-chart="4 HOUR">
+        <?= State::hydratePercent($model['price'], State::getAvgValue('4h', $currencySymbol)); ?>
+        <br>
+        <?= State::hydrate(State::getAvgValue('4h', $currencySymbol)); ?>
     </td>
     <td class="digital-td visual-td-ajax rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('1d', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-interval="1m" data-symbol="<?=$currencySymbol?>" data-chart="1 DAY">
 
