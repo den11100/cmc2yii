@@ -168,7 +168,7 @@ class SiteController extends Controller
         /* находим id записей максимально близкие к now но не старше X дней*/
         $array = State::find()
             ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL 200 DAY)*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
-            ->andWhere(['interval' => "1d"])
+            ->andWhere(['in','interval', ['1d','1m','1h']])
             ->andWhere(['market' => $symbol.'/USDT'])
             ->orderBy('timestamp asc')
             ->asArray()
@@ -176,7 +176,7 @@ class SiteController extends Controller
 
         $idRowTimestampLessToNow = ArrayHelper::getColumn($array,'id');
         $list = State::find()
-            ->select('timestamp, avg(open) as avg_open, avg(high) as avg_high, avg(low) as avg_low,  avg(close) as avg_close, volume')
+            ->select('timestamp, avg(open) as avg_open, avg(high) as avg_high, avg(low) as avg_low,  avg(close) as avg_close, avg(volume) as volume')
             ->where(['in', 'id', $idRowTimestampLessToNow])
             ->asArray()
             ->groupBy('timestamp')

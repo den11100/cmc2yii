@@ -128,7 +128,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
             "spacing": [10, 10, 15, 10],
             "resetZoomButton": {"theme": {"zIndex": 20}, "position": {"align": "right", "x": -10, "y": 10}},
             "width": null,
-            "height": null,
+            "height": 600,
             "borderColor": "#335cad",
             "backgroundColor": "#F7FaFb",
             "plotBorderColor": "#cccccc",
@@ -144,8 +144,13 @@ window.openCandleGraph = function (id, data, name, volumes) {
             "margin": 15,
             "widthAdjust": -44
         },
+        "xAxis":{
+            minRange: 60*60*1000
+        },
         "yAxis": [{ // Primary yAxis
             labels: {
+                align: 'right',
+                x: 10,
                 format: '{value} $',
                 style: {
                     color: "#ffbd16"
@@ -165,7 +170,7 @@ window.openCandleGraph = function (id, data, name, volumes) {
                 }
             },
             labels: {
-                format: '{value} $',
+                format: '{value} k $',
                 style: {
                     color: "#ff14dc"
                 }
@@ -291,44 +296,81 @@ window.openCandleGraph = function (id, data, name, volumes) {
         },
         "labels": {"style": {"position": "absolute", "color": "#333333"}},
         "rangeSelector": {
-            selected: 2,
+            allButtonsEnabled: true,
+            selected: 4,
             buttons: [
             {
-                type: 'h',
-                count: 1,
-                text: '1h'
+                type: 'minute',
+                count: 60,
+                text: '1h',
+                dataGrouping: {
+                    forced: true,
+                    units: [['minute', [1]]]
+                }
             },
             {
-                type: 'h',
-                count: 4,
-                text: '4h'
+                type: 'minute',
+                count: 240,
+                text: '4h',
+                dataGrouping: {
+                    forced: true,
+                    units: [['minute', [1]]]
+                }
             }, {
-                type: 'day',
-                count: 24,
-                text: '24h'
+                type: 'minute',
+                count: 1440,
+                text: '24h',
+                dataGrouping: {
+                    forced: true,
+                    units: [['minute', [15]]]
+                }
             }, {
-                type: 'day',
-                count: 7,
-                text: '7d'
+                type: 'hour',
+                count: 168,
+                text: '7d',
+                dataGrouping: {
+                    forced: true,
+                    units: [['hour', [4]]]
+                }
             }, {
                 type: 'day',
                 count: 14,
-                text: '14d'
+                text: '14d',
+                dataGrouping: {
+                    forced: true,
+                    units: [['day', [1]]]
+                }
             }, {
                 type: 'day',
                 count: 30,
-                text: '30d'
+                text: '30d',
+                dataGrouping: {
+                    forced: true,
+                    units: [['day', [1]]]
+                }
             }, {
                 type: 'day',
                 count: 45,
-                text: '45d'
+                text: '45d',
+                dataGrouping: {
+                    forced: true,
+                    units: [['day', [1]]]
+                }
             }, {
                 type: 'day',
                 count: 90,
-                text: '90d'
+                text: '90d',
+                dataGrouping: {
+                    forced: true,
+                    units: [['day', [1]]]
+                }
             }, {
                 type: 'all',
-                text: 'All'
+                text: 'All',
+                dataGrouping: {
+                    forced: true,
+                    units: [['day', [1]]]
+                }
             },]
         },
         // "legendBackgroundColor": "rgba(0, 0, 0, 0.5)",
@@ -346,28 +388,13 @@ window.openCandleGraph = function (id, data, name, volumes) {
             zIndex: 6,
             name: name + ' Stock Price',
             data: data,
-            dataGrouping: {
-                units: [
-                    [
-                        'day', // unit name
-                        [1, 2, 3, 4, 5] // allowed multiples
-                    ],
-                    [
-                        'week', // unit name
-                        [1, 2, 3, 4] // allowed multiples
-                    ], [
-                        'month',
-                        [1]
-                    ]
-                ]
-            },
         }, {
             name: "Total volume",
             type: "column",
             data: volumes,
             yAxis: 1,
-            zIndex: 0,
-            id: "mainvolume"
+            //zIndex: 0,
+            //id: "mainvolume"
         }],
         "isStock": true
 

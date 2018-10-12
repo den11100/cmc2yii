@@ -1,6 +1,7 @@
 <?php
 
 use app\models\State;
+use yii\db\Expression;
 
 ini_set('memory_limit', '256M');
 	date_default_timezone_set('Europe/Moscow');	
@@ -38,6 +39,7 @@ ini_set('memory_limit', '256M');
 
 				DB::insert_items('state', $pairs);
 			}
+            DB::cleanData($interval);
             DB::cleanDuplicate();
 		}
 
@@ -161,13 +163,40 @@ ini_set('memory_limit', '256M');
 			}
 		}
 
+        /**
+         * Удаляем задвоения после повторного парсинга
+         * @throws \yii\db\Exception
+         */
 		public static function cleanDuplicate()
         {
             $result = Yii::$app->db->createCommand('
 DELETE FROM {{%state}} WHERE id NOT IN (SELECT id FROM(SELECT MAX(id) id FROM {{%state}} t 
 GROUP BY t.timestamp, t.exchange, t.market, t.`interval` HAVING COUNT(*) > 0 ) AS A);
             ')->execute();
-            print_r($result);
+            print_r(" cleanDuplicateDel-".$result);
+        }
+
+        /**
+         * Оставляем записи для выборки по дням за последние 201 день
+         * Для выборки по минутам за последние 2 дня
+         * Для выборки по часам за последние 8 дней
+         * @param string $interval
+         */
+        public static function cleanData($interval)
+        {
+            if($interval == "1d") {
+                $result = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 201 DAY))*1000'));
+                print_r(" older200dayDel-" . $result);
+            } elseif($interval == "1m") {
+                $result1 = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 2 DAY))*1000 AND `interval` = "1m"'));
+                print_r(" 1m cleane-" . $result1);
+            } elseif($interval == "1h") {
+                $result2 = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 8 DAY))*1000 AND `interval` = "1h"'));
+                print_r(" 1h cleane-" . $result2);
+            } else {
+                $result = State::deleteAll(new Expression('timestamp < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 201 DAY))*1000'));
+                print_r(" older200dayDel-" . $result);
+            }
         }
 
 	}
