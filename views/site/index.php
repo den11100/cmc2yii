@@ -23,7 +23,7 @@ $this->title = 'CMC2';
                                 <th>Symbol</th>
                                 <th>Price</th>
                                 <th>Market Cap</th>
-                                <th>Circ. Supply</th>
+                                <th>Circ.Supply</th>
                                 <th>BTC</th>
                                 <th>1h</th>
                                 <th>24h</th>

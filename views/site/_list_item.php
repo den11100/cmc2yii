@@ -55,7 +55,7 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
     <td class="digital-td">
         <?= $currencySymbol; ?>
     </td>
-    <td class="digital-td text-small">
+    <td class="digital-td">
         <?php if ($model['price'] > 1): ?>
             <?= '$ '.number_format($model['price'],2); ?>
         <?php else: ?>

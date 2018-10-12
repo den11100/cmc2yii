@@ -13,7 +13,7 @@ body {
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 70px 5px 20px;
 }
 
 .footer {
@@ -196,7 +196,7 @@ td.visual-td>div{
     stroke: green !important;
 }*/
 .container {
-    width: 90%;
+    width: 95%;
 }
 .bg-0{
     background-color: rgba(76, 175, 80, 0.05);
