@@ -83,6 +83,111 @@ $(document).ready(function () {
         $(".popup, .popup-content").removeClass("active");
     });
 
+    // -------------------------------------------------------
+
+    $(".visual-td-ajax").on("click", function () {
+        $(".popup, .popup-content").addClass("active");
+
+        var id = $(this).data('id');
+        var interval = $(this).data('interval');
+        var symbol = $(this).data('symbol');
+        var chart = $(this).data('chart');
+        $.ajax({
+            url: '/site/get-data-point-ajax',
+            type: 'POST',
+            data: {"interval":interval, "symbol":symbol, "chart":chart},
+            success: function(res){
+                drawMyChart(res);
+            },
+            error: function(){
+                alert('Error!');
+            }
+        });
+
+        function drawMyChart(res) {
+            var obj = JSON.parse(res);
+            console.log(obj.priceList);
+            console.log(obj.volumeList);
+            chartOptions = {
+                title: '',
+                plotOptions: {
+                    series: {
+                        showInLegend: false,
+                        label: {
+                            connectorAllowed: false
+                        },
+                    },
+                    line: {
+                        marker: {
+                            enabled: false
+                        },
+                        color: '#FF0000',
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '$' + this.y;
+                    }
+                },
+                navigation: {
+                    buttonOptions: {
+                        enabled: false
+                    }
+                },
+                yAxis: [{
+                    labels: {
+                        align: 'right',
+                        x: -3
+                    },
+                    title: {
+                        text: 'Price'
+                    },
+                    height: '60%',
+                    lineWidth: 2,
+                    resize: {
+                        enabled: true
+                    }
+                }, {
+                    labels: {
+                        align: 'right',
+                        x: -3
+                    },
+                    title: {
+                        text: 'Volume'
+                    },
+                    top: '65%',
+                    height: '35%',
+                    offset: 0,
+                    lineWidth: 2
+                }],
+
+                series: [{
+                    name: 'Price',
+                    type: 'spline',
+                    data: obj.priceList,
+                    dataGrouping: {
+                        units: [1,15]
+                    }
+                }, {
+                    name: 'Volume',
+                    type: 'column',
+                    data: obj.volumeList,
+                    yAxis: 1,
+                    dataGrouping: {
+                        units: [1,15]
+                    }
+                }],
+            };
+
+            // Create the chart
+            Highcharts.chart(id, chartOptions);
+        }
+
+    });
+
+
+
+
 });
 
 window.openGraph = function (id, data) {

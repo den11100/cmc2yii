@@ -105,7 +105,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        State::prepareStates();
+        State::prepareStatesDays();
 
         $finalModels = MarketCap::find()->orderBy('rank')->asArray()->all();
 
@@ -201,5 +201,20 @@ class SiteController extends Controller
             'listLeadersGrow' => $listLeadersGrow,
             'listLeadersFall' => $listLeadersFall,
         ]);
+    }
+
+    public function actionGetDataPointAjax()
+    {
+//        $priceAndVolumeList = State::getPriceAndVolumeList("1m", "BTC", "1 HOUR");
+//        VarDumper::dump($priceAndVolumeList,7,1);die;
+
+        if (Yii::$app->request->isAjax){
+            $interval = Help::cleanData(Yii::$app->request->post('interval'));
+            $symbol = Help::cleanData(Yii::$app->request->post('symbol'));
+            $chart = Help::cleanData(Yii::$app->request->post('chart'));
+
+            $priceAndVolumeList = State::getPriceAndVolumeList($interval, $symbol, $chart);
+            return json_encode($priceAndVolumeList);
+        }
     }
 }

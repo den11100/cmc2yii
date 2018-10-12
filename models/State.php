@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 
 /**
@@ -33,7 +35,7 @@ class State extends \yii\db\ActiveRecord
         return 'state';
     }
 
-    public static function prepareStates()
+    public static function prepareStatesDays()
     {
         $times = [];
         $times['0d']['to'] = (time() - 60)*1000;
@@ -221,6 +223,36 @@ class State extends \yii\db\ActiveRecord
             $result[] = (float)State::getVolume($i.'d', $symbol);
         }
         return implode(',', $result);
+    }
+
+    public static function getPriceAndVolumeList($interval, $symbol, $chart)
+    {
+        /* находим id записей максимально близкие к now */
+        $array = State::find()
+            ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$chart.')*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
+            ->andWhere(['interval' => $interval])
+            ->andWhere(['market' => $symbol.'/USD'])
+            ->orderBy('timestamp asc')
+            ->asArray()
+            ->all();
+
+        $idRowTimestampLessToNow = ArrayHelper::getColumn($array,'id');
+        $list = State::find()
+            ->select('timestamp, avg(high) as avg_high, avg(low) as avg_low, avg(volume) as avg_volume')
+            ->where(['in', 'id', $idRowTimestampLessToNow])
+            ->asArray()
+            ->groupBy('timestamp')
+            ->all();
+
+        $priceList = [];
+        $volumeList = [];
+        foreach ($list as $key => $item) {
+            $avg_prise = ($item['avg_high'] + $item['avg_low'])/2;
+            array_push($priceList, $avg_prise);
+            array_push($volumeList, $item['avg_volume']*1);
+        }
+
+        return ["priceList" => $priceList, "volumeList" => $volumeList];
     }
 
 }
