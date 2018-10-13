@@ -24,9 +24,9 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
 
 ?>
 <tr>
-    <!--<td class="digital-td">
-        <?/*= $model['id']; */?>
-    </td>-->
+    <td class="id-td">
+        <?= $model['id']; ?>
+    </td>
     <td class="digital-td name-td">
         <a href="/site/info-market/<?= $currencySymbol ?>">
             <?php if (file_exists(__DIR__ . '/../../web/icons/' . strtolower($currencySymbol) . '.png')) { ?>
@@ -45,14 +45,14 @@ $this->registerJs("openGraph('container-".$model['id']."', [".$sevenDaysPlot."])
             <?= '$ '.number_format($model['price'],4); ?>
         <?php endif; ?>
     </td>
+    <td class="digital-td btc-td">
+        <?= number_format($model['price']/$bitcoinPrice, 5); ?>
+    </td>
     <td class="digital-td text-small">
         <?= '$ '.number_format($model['market_cap'],0) ?>
     </td>
     <td class="digital-td text-small">
         <?= number_format($model['circulating_supply'],0) ?>
-    </td>
-    <td class="digital-td btc-td">
-        <?= number_format($model['price']/$bitcoinPrice, 5); ?>
     </td>
     <td class="digital-td visual-td-ajax rnd-td bg-<?= State::getPercentGradation($model['price'], State::getAvgValue('4h', $currencySymbol)); ?>" data-target="modal-plot-container" data-id="plot-id" data-interval="1m" data-symbol="<?=$currencySymbol?>" data-chart="4 HOUR">
         <?= State::hydratePercent($model['price'], State::getAvgValue('4h', $currencySymbol)); ?>

@@ -99,11 +99,7 @@ class State extends \yii\db\ActiveRecord
         $statesByTime = [];
         /** @var State $state */
         foreach ($states as $state){
-            if ($state->timestamp > (time()-4*60*60)*1000 && $state->timestamp < (time() - 1.5*60*60)*1000 ){
-                $statesByTime['4h'][$state->getSymbol()]['value'][] = $state->getMiddleValue();
-            } else {
-                $statesByTime['1h'][$state->getSymbol()]['value'][] = $state->getMiddleValue();
-            }
+            $statesByTime['4h'][$state->getSymbol()]['value'][] = $state->getMiddleValue();
         }
 
         foreach ($statesByTime as $time => $statesBySymbols){
@@ -144,7 +140,7 @@ class State extends \yii\db\ActiveRecord
 
         $diff = $valueCurrent-$valueThat;
 
-        return  '<span class="bd">'.$percent . '%</span>' . "&nbsp;<span class=\"sm\">(".round($diff, 2)."$)</span>";
+        return  '<span class="bd">'.$percent . '%</span>' . "<br><span class=\"sm\">(".round($diff, 2)."$)</span>";
     }
 
     public static function getPercentGradation($valueCurrent, $valueThat)

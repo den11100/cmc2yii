@@ -89,7 +89,7 @@ $(document).ready(function () {
         Highcharts.chart(id, chartOptions);
     });
 
-    $(".close, .popup").on("click", function () {
+    $(".close, .popup, .popup-content").on("click", function () {
         $(".popup, .popup-content").removeClass("active");
     });
 

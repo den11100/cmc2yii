@@ -38,10 +38,6 @@ body {
     font-style: italic;
 }
 
-.text-small {
-    font-size: 10px;
-}
-
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;
@@ -139,8 +135,8 @@ a.desc:after {
 }
 
 .chart7d{
-    width: 210px;
-    max-width: 210px;
+    width: 290px;
+    max-width: 290px;
     height: 45px;
     max-height: 45px;
 }
@@ -163,9 +159,9 @@ td.visual-td{
 }
 td.visual-td>div{
     position: absolute;
-    width: 230px;
-    max-width: 230px;
-    margin-left: -10px;
+    width: 310px;
+    max-width: 310px;
+    margin-left: -11px;
     margin-top: 5px;
     height: 80px;
     max-height: 80px;
@@ -183,10 +179,6 @@ td.visual-td>div{
 }
 .main-table td{
     max-height: 60px;
-}
-
-.table > thead > tr > th {
-    text-align: center;
 }
 .th-chart {
     width: 185px;
@@ -316,7 +308,6 @@ td.visual-td>div{
     width: 16px;
     max-width: 16px;
 }
-
 /* site/index */
 .main-color .highcharts-area {
     fill: rgba(0, 128, 0, 0.42);
@@ -345,4 +336,13 @@ td.visual-td>div{
 .visual-td-ajax:hover,
 .visual-td:hover{
     cursor:pointer;
+}
+td.digital-td{
+    padding-right: 6px !important;
+    padding-top: 4px !important;
+    line-height: 22px !important;
+}
+td.id-td{
+    text-align: center;
+    width: 40px !important;
 }

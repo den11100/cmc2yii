@@ -18,13 +18,13 @@ $this->title = 'CMC2';
             'layout' => '<table class="main-table table">
                         <thead>
                             <tr>
-                                <!--<th>#</th>-->
+                                <th>#</th>
                                 <th>Name</th>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                                <th>Market Cap</th>
-                                <th>Circ.Supply</th>
                                 <th>BTC</th>
+                                <th>Mkt. Cap</th>
+                                <th>Circ. Supply</th>
                                 <th>4h</th>
                                 <th>24h</th>
                                 <th>7d</th>

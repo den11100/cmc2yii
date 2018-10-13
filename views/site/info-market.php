@@ -58,6 +58,7 @@ $this->registerJs("openCandleGraph('market-candle-container',". json_encode($tic
                             </div>
                             <div class="col-md-8">
                                 <p>
+
                                     <strong>Price high:</strong> <?= $item['high'] ?> $<br>
                                     <strong>Price low:</strong> <?= $item['low'] ?> $
                                 </p>
