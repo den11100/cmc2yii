@@ -254,7 +254,7 @@ class State extends \yii\db\ActiveRecord
         $array = State::find()
             ->where(new Expression('timestamp BETWEEN UNIX_TIMESTAMP(NOW() - INTERVAL '.$chart.')*1000 AND UNIX_TIMESTAMP(NOW())*1000'))
             ->andWhere(['interval' => $interval])
-            ->andWhere(['market' => $symbol.'/USD'])
+            ->andWhere(['market' => $symbol.'/USDT'])
             ->orderBy('timestamp asc')
             ->asArray()
             ->all();

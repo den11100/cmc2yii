@@ -136,7 +136,7 @@ $(document).ready(function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return '$' + this.y;
+                        return '$' + this.y + "<br/>" + Highcharts.dateFormat('%B %e, %H:%M', this.x);
                     }
                 },
                 navigation: {
